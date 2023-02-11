@@ -6,13 +6,31 @@
 
 
 {% block content %}
+<style>
+    h1 {text-align: center;}
+    .container {
+        height: 200px;
+        position: relative;
+        }
+
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+}
+</style>
+
   <h1>Subscribe For Personilized Content</h1>
-  
+
   <ul>
-    <div>
-    <form class="form-inline">
-        <button class="btn" type="submit">Subscribe Now</button>
-    </form>
+    <div class="container">
+        <div class="center">
+         <form class="form-inline">
+            <button class="btn" type="submit">Subscribe Now</button>
+         </form>
+        </div>
     </div>
   </ul>
 {% endblock %}
