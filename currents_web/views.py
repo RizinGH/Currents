@@ -6,3 +6,10 @@ def index(request):
 
 def home(request):
     return render(request, "currents_web/home.html")
+
+def fy(request):
+    return render(request, "currents_web/fy.html")
+
+
+def profile(request):
+    return render(request, "currents_web/profile.html")
