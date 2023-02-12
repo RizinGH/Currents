@@ -10,6 +10,8 @@ def home(request):
 def fy(request):
     return render(request, "currents_web/fy.html")
 
-
 def profile(request):
     return render(request, "currents_web/profile.html")
+
+def login(request):
+    return render(request, "currents_web/login.html")
