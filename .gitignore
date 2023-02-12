@@ -4,3 +4,6 @@ env*/
 *.pot
 *.pyc
 __pycache__
+
+#unwanted
+*.csv
