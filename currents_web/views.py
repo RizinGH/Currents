@@ -15,3 +15,6 @@ def profile(request):
 
 def login(request):
     return render(request, "currents_web/login.html")
+
+def register(request):
+    return render(request, "currents_web/register.html")
