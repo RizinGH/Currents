@@ -1,5 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from .forms import NewUserForm
+from django.contrib import messages
+from django.contrib.auth import login
+import feedparser
+
 
 def index(request):
     return render(request, "currents_web/base.html")
@@ -13,8 +18,17 @@ def fy(request):
 def profile(request):
     return render(request, "currents_web/profile.html")
 
-def login(request):
+def userLogin(request):
     return render(request, "currents_web/login.html")
 
 def register(request):
-    return render(request, "currents_web/register.html")
+    if request.method =="POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request ,user)
+            messages.success(request, "Sign-Up SuccessFull")
+            return redirect("home")
+        messages.error(request, "Sign-Up Failed")
+    form = NewUserForm()
+    return render(request = request, template_name="currents_web/register.html", context={"register_form":form})

@@ -1,42 +1,58 @@
 {% extends "./index_base.html" %}
 {% load static %}
 {% block title %}
-  Currents
+  Register
 {% endblock %}
 
-
 {% block content %}
+
+<style>
+
+  .form-control-lg{
+    border-radius: 25px;
+    padding: 20px; 
+    width: 400px;
+    height: 15px;   
+  }
+
+
+  .btn {
+    background-color: #e7e7e7; 
+    color: black;
+    border: 2px solid #e7e7e7
+    }
+
+</style>
  
-<section style="padding-top: 100px">
+<section style="padding-top: 100px" style="padding-bottom: 100px">
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="d-flex justify-content-center">
-          <img src="{% static 'cat-behind-bars.png' %}"  class="img-fluid img-thumbnail" style="height: 450px;" alt="logo">
-        </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
           <form name="myform" method="POST">
 
-            <div class="divider d-flex justify-content-center my-4">
+            <div class="divider d-flex justify-content-center my-3">
               <p class="text-center fw-bold mx-10 mb-0" style="font-weight: bold; font-size: 30px;">Register</p>
             </div>
 
             <div class="form-outline mb-2">
               <label class="form-label text-muted" for="uname">Username</label>
-              <input type="text" id="uname" name="uname" class="form-control form-control-lg" placeholder="Enter Username" /> 
+              <input type="text" id="uname" name="uname" class="form-control form-control-lg"  /> 
             </div>
+          
 
             <div class="form-outline mb-3">
-                <label class="form-label text-muted" for="email">Email</label>
-                <input type="email" id="email" name="email"  class="form-control form-control-lg" placeholder="Enter email" />
-              </div>
-          
-            <div class="form-outline mb-4">
-              <label class="form-label text-muted" for="password">Password</label>
-              <input type="password" id="password" name="password"  class="form-control form-control-lg" placeholder="Enter password" />
+              <label class="form-label text-muted" for="password">Email</label>
+              <input type="email" id="email" name="email"  class="form-control form-control-lg" />
             </div>
 
-            <div class="text-center text-lg-start mt-4 pt-2">
-              <input type="submit" name="Submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" value="login">
+            <div class="form-outline mb-4">
+              <label class="form-label text-muted" for="password">Password</label>
+              <input type="password" id="password" name="password"  class="form-control form-control-lg" />
+            </div>
+  
+            <div class="form-outline text-center">
+              <input type="submit" name="Submit" class="btn" style="padding-left: 3rem; padding-right: 3rem;" value="Register">
+              
             </div>
             
           </form>

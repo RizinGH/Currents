@@ -4,52 +4,67 @@
   Login
 {% endblock %}
 
-{% block css %} 
-.rounded-t-5 {
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-  }
-
-  @media (min-width: 992px) {
-    .rounded-tr-lg-0 {
-      border-top-right-radius: 0;
-    }
-
-    .rounded-bl-lg-5 {
-      border-bottom-left-radius: 0.5rem;
-    }
-  }
-{% endblock %}
-
 {% block content %}
+
+<style>
+
+  body {
+    background-image: url("{% static 'ex1.png' %}");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .form-control-lg{
+    border-radius: 25px;
+    padding: 20px; 
+    width: 400px;
+    height: 15px;   
+  }
+
+  .text{
+  background: url(klematis.jpg) repeat;
+  border: 2px solid black;
+}
+
+.text {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+}
+
+.text p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+</style>
  
-<section style="padding-top: 100px">
+<section style="padding-top: 100px" style="padding-bottom: 100px">
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="d-flex justify-content-center">
-          <img src="{% static 'cat-behind-bars.png' %}"  class="img-fluid img-thumbnail" style="height: 450px;" alt="logo">
-        </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
           <form name="myform" method="POST">
 
-            <div class="divider d-flex justify-content-center my-4">
+            <div class="divider d-flex justify-content-center my-3">
               <p class="text-center fw-bold mx-10 mb-0" style="font-weight: bold; font-size: 30px;">Login</p>
             </div>
 
             <div class="form-outline mb-2">
               <label class="form-label text-muted" for="uname">Username</label>
-              <input type="text" id="uname" name="uname" class="form-control form-control-lg" placeholder="Enter Username" /> 
+              <input type="text" id="text" name="uname" class="form-control form-control-lg"  /> 
             </div>
           
             <div class="form-outline mb-3">
               <label class="form-label text-muted" for="password">Password</label>
-              <input type="password" id="password" name="password"  class="form-control form-control-lg" placeholder="Enter password" />
+              <input type="password" id="text" name="password"  class="form-control form-control-lg" />
             </div>
 
-            <p>Don't have an account? <a href="/register" >Register here</a></p>
+              <p style="font-weight: bold"> Don't have an account? <a href="/register" >Register here</a></p>
   
             <div class="text-center text-lg-start mt-4 pt-2">
-              <input type="submit" name="Submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" value="login">
+              <input type="submit" name="Submit" class="btn" style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Login">
             </div>
             
           </form>
