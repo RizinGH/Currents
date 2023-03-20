@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from .forms import NewUserForm
 from django.contrib import messages
 from django.contrib.auth import login
-import feedparser
 
 
 def index(request):
