@@ -29,7 +29,7 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
           <form name="myform" method="POST">
-
+            {% csrf_token %}
             <div class="divider d-flex justify-content-center my-3">
               <p class="text-center fw-bold mx-10 mb-0" style="font-weight: bold; font-size: 30px;">Register</p>
             </div>

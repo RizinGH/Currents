@@ -9,9 +9,8 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('fy', views.fy, name='fy'),
     path('profile', views.profile, name='profile'),
-    path('login', views.userLogin, name='userLogin'),
+    path('login/', views.login, name='userLogin'),
     path('register', views.register, name='register'),
+    path('subscribe',views.subscribe,name='subscribe'),
 
 ]
-
-urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

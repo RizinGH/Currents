@@ -3,11 +3,10 @@ from django.http import HttpResponse
 from .forms import NewUserForm
 from django.contrib import messages
 from django.contrib.auth import login
-import feedparser
 
 
 def index(request):
-    return render(request, "currents_web/base.html")
+    return render(request, "currents_web/index_base.html")
 
 def home(request):
     return render(request, "currents_web/home.html")
@@ -18,7 +17,10 @@ def fy(request):
 def profile(request):
     return render(request, "currents_web/profile.html")
 
-def userLogin(request):
+def subscribe(request):
+    return render(request, "currents_web/subscribe.html")
+
+def login(request):
     return render(request, "currents_web/login.html")
 
 def register(request):
