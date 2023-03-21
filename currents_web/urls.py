@@ -12,5 +12,6 @@ urlpatterns = [
     path('login/', views.login, name='userLogin'),
     path('register', views.register, name='register'),
     path('subscribe',views.subscribe,name='subscribe'),
+    path('index_home',views.index_home,name="index_home"),
 
 ]

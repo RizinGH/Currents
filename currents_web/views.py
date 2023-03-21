@@ -20,6 +20,10 @@ def profile(request):
 def subscribe(request):
     return render(request, "currents_web/subscribe.html")
 
+def index_home(request):
+    return render(request, "currents_web/index_home.html")
+
+
 def login(request):
     return render(request, "currents_web/login.html")
 

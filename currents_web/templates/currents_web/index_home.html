@@ -1,0 +1,96 @@
+{% extends "./index_base.html" %}
+
+{% block title %}
+  Currents
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+.split-screen {
+	display: flex;
+	flex-direction: row;
+	height: 100vh;
+}
+
+.left-pane {
+	flex-basis: 50%;
+	background-color: #000000;
+	padding: 20px;
+  text-align: center;
+}
+
+.right-pane {
+	flex-basis: 50%;
+	background-color: #ffffff;
+	padding: 20px;
+  text-align: center;
+}
+
+.h1{
+  color: #ffffff;
+  font-family: "Avenir Next Condensed Medium", Calibri, "Gill Sans", sans-serif;
+}
+
+.h2{
+  color: #000000;
+  font-family: "Avenir Next Condensed Medium", Calibri, "Gill Sans", sans-serif;
+}
+
+.btn {
+ padding: 1.1em 2em;
+ background: none;
+ border: 2px solid #fff;
+ font-size: 15px;
+ color: #131313;
+ cursor: pointer;
+ position: relative;
+ overflow: hidden;
+ transition: all 0.3s;
+ border-radius: 12px;
+ background-color: #ffffff;
+ font-weight: bolder;
+ box-shadow: 0 2px 0 2px #000;
+}
+
+.btn:before {
+ content: "";
+ position: absolute;
+ width: 100px;
+ height: 120%;
+ background-color: #ff6700;
+ top: 50%;
+ transform: skewX(30deg) translate(-150%, -50%);
+ transition: all 0.5s;
+}
+
+.btn:hover {
+ background-color: #000000;
+ color: #fff;
+ box-shadow: 0 2px 0 2px #0d3b66;
+}
+
+.btn:hover::before {
+ transform: skewX(30deg) translate(150%, -50%);
+ transition-delay: 0.1s;
+}
+
+.btn:active {
+ transform: scale(0.9);
+}
+</style>
+
+<div class="split-screen">
+  <div class="left-pane">
+    <h2 class="h1"></br></br></br>Currents provides a personalized news experience with diverse sources. You can browse breaking news, features, and opinions on topics from trusted news organizations to stay informed and up-to-date.</h2>
+  </div>
+  <div class="right-pane">
+    <h2 class="h2"></br></br></br></br>Stay informed and connected with Currents. Sign up today and start exploring the latest news from around the world.</br></br></h2>
+    <button class="btn" onclick = "window.location.href='/register';">Register Now !
+    </button>
+  </div>
+</div>
+
+{% endblock %}
+    
