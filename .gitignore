@@ -5,8 +5,8 @@ env*/
 *.pyc
 __pycache__
 */migrations/
-# .vscode/
+.vscode/
 
 #unwanted
 *.csv
-# *.json
+*.json
