@@ -6,7 +6,7 @@ from django.contrib.auth import login
 
 
 def index(request):
-    return render(request, "currents_web/index_base.html")
+    return render(request, "currents_web/index.html")
 
 def home(request):
     return render(request, "currents_web/home.html")
@@ -19,9 +19,6 @@ def profile(request):
 
 def subscribe(request):
     return render(request, "currents_web/subscribe.html")
-
-def index_home(request):
-    return render(request, "currents_web/index_home.html")
 
 
 def login(request):
@@ -38,3 +35,12 @@ def register(request):
         messages.error(request, "Sign-Up Failed")
     form = NewUserForm()
     return render(request = request, template_name="currents_web/register.html", context={"register_form":form})
+
+def about(request):
+    pass
+
+def weather(request):
+    pass
+
+def dashboard(request):
+    return render(request, "currents_web/dashboard.html")

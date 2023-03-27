@@ -6,12 +6,13 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('home', views.home, name='home'),
     path('fy', views.fy, name='fy'),
     path('profile', views.profile, name='profile'),
-    path('login/', views.login, name='userLogin'),
+    path('dashboard', views.dashboard, name='dashboard'),
+    path('weather', views.weather, name='weather'),
+    path('login', views.login, name='login'),
     path('register', views.register, name='register'),
     path('subscribe',views.subscribe,name='subscribe'),
-    path('index_home',views.index_home,name="index_home"),
+    path('about',views.about,name='about'),
 
 ]
