@@ -16,9 +16,9 @@
   }
 
   .text{
-  background: url(klematis.jpg) repeat;
-  border: 2px solid black;
-}
+    background: url(klematis.jpg) repeat;
+    border: 2px solid black;
+  }
 
 .text {
   margin: 30px;
@@ -31,6 +31,13 @@
   margin: 5%;
   font-weight: bold;
   color: #000000;
+}
+
+.message-error{
+    color: red;
+}
+.message-success{
+    color: green;
 }
 </style>
  
@@ -53,8 +60,17 @@
               <label class="form-label text-muted" for="password">Password</label>
               <input type="password" id="text" name="password"  class="form-control form-control-lg" />
             </div>
+            {% if messages %}
+            <div class="mgs-area text-center">
+                <div class="mgs-item">
+                {% for message in messages %}
+                <span {% if message.tags %} class="nav_item message-{{ message.tags }} " {% endif %}> {{ message }} </span>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
 
-              <p style="font-weight: bold"> Don't have an account? <a href="/register" >Register here</a></p>
+            <p class="text-center" style="font-weight: bold"> Don't have an account? <a href="/register" >Register here</a></p>
   
             <div class="text-center text-lg-start mt-4 pt-2">
               <input type="submit" name="Submit" class="btn" style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Login">

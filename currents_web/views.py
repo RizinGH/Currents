@@ -27,9 +27,20 @@ def login(request):
 
 def register(request):
     if request.method =="POST":
-        User(request.POST['email'], request.POST['password']).save()
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
 
-        UserDetails()
+        if User.objects.filter(email=email).count():
+            messages.error(request, "Account with email already exists!!")
+            return render(request, "currents_web/register.html")
+        else:
+            user = User(email, password)
+            user.save()
+            UserDetails(email=user, username=username).save()
+            messages.success(request, "Registered Successfully")
+            return render(request, "currents_web/register.html")
+
     #     form = RegistrationForm(request.POST['email'], request.POST['password'])
     #     if form.is_valid():
     #         user = form.save()
@@ -38,6 +49,7 @@ def register(request):
     #         return redirect("home")
     #     messages.error(request, "Sign-Up Failed")
     # form = RegistrationForm()
+
     return render(request = request, template_name="currents_web/register.html", context={})
 
 def about(request):

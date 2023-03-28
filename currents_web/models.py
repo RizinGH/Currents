@@ -25,11 +25,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 # user details
 class UserDetails(models.Model):
-       username = models.CharField(max_length=20, primary_key=True)
-       email = models.ForeignKey(User, to_field="email", on_delete=models.CASCADE)
+       email = models.ForeignKey(User, to_field="email", on_delete=models.CASCADE, primary_key=True)
+       username = models.CharField(max_length=20)
        userPreferences = models.CharField(max_length=300)
-        
-
+       
        def __str__(self):
               return self.username
 
