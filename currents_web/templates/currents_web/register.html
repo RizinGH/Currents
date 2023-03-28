@@ -15,12 +15,19 @@
     height: 15px;   
   }
 
-
   .btn {
     background-color: #e7e7e7; 
     color: black;
     border: 2px solid #e7e7e7
     }
+  
+  .message-error {
+    color: red;
+  }
+
+  .message-success {
+    color: green;
+  }
 
 </style>
  
@@ -35,23 +42,33 @@
             </div>
 
             <div class="form-outline mb-2">
-              <label class="form-label text-muted" for="uname">Username</label>
-              <input type="text" id="uname" name="uname" class="form-control form-control-lg"  /> 
+              <label class="form-label text-muted" for="username">Username</label>
+              <input type="text" id="username" name="username" class="form-control form-control-lg" required/> 
             </div>
           
 
             <div class="form-outline mb-3">
               <label class="form-label text-muted" for="password">Email</label>
-              <input type="email" id="email" name="email"  class="form-control form-control-lg" />
+              <input type="email" id="email" name="email"  class="form-control form-control-lg" required/>
             </div>
 
             <div class="form-outline mb-4">
               <label class="form-label text-muted" for="password">Password</label>
-              <input type="password" id="password" name="password"  class="form-control form-control-lg" />
+              <input type="password" id="password" name="password"  class="form-control form-control-lg" required/>
             </div>
 
-            <p style="font-weight: bold"> Already a user! <a href="/login" >Login</a></p>
-  
+            {% if messages %}
+            <div class="mgs-area text-center">
+                <div class="mgs-item">
+                {% for message in messages %}
+                <span {% if message.tags %} class="nav_item message-{{ message.tags }} " {% endif %}> {{ message }} </span>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <p class="text-center" style="font-weight: bold"> Already a user! <a href="{% url 'login' %}" >Login</a></p>
+            
             <div class="text-center text-lg-start mt-4 pt-2">
               <input type="submit" name="Submit" class="btn" style="padding-left: 3rem; padding-right: 3rem;" value="Register">
               
