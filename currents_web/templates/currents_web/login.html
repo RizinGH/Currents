@@ -32,8 +32,16 @@
   font-weight: bold;
   color: #000000;
 }
+
+body {
+    background-image: url("{% static '.jpg' %}");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
 </style>
  
+<div class="container">
 <section style="padding-top: 100px" style="padding-bottom: 100px">
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -64,7 +72,7 @@
         </div>
       </div>
     </div>
-   
+  </div> 
   </section>
 </html>  
 {% endblock %}

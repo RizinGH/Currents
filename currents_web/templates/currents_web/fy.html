@@ -7,19 +7,19 @@
 
 {% block content %}
 <style>
-    h1 {text-align: center;}
-    .container {
-        height: 200px;
-        position: relative;
-        }
+h1 {text-align: center;}
+.container {
+    height: 200px;
+    position: relative;
+    }
 
-    .center {
-        position: absolute;
-        top: 150%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-}
+.center {
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 
 .h1
 {
@@ -28,17 +28,60 @@
    left: 50%;
    -ms-transform: translate(-50%, -50%);
    transform: translate(-50%, -50%);
+   font-family:"Candara", sans-serif;
+}
+
+.btn1 {
+      padding: 1.1em 2em;
+      background: none;
+      border: 2px solid #fff;
+      font-size: 15px;
+      color: #131313;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      border-radius: 12px;
+      background-color: #ffffff;
+      font-weight: bolder;
+      box-shadow: 0 2px 0 2px #000;
+}
+
+.btn1:before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 120%;
+    background-color: #ff6700;
+    top: 50%;
+    transform: skewX(30deg) translate(-150%, -50%);
+    transition: all 0.5s;
+}
+
+.btn1:hover {
+    background-color: #000000;
+    color: #fff;
+    box-shadow: 0 2px 0 2px #000000;
+}
+
+.btn1:hover::before {
+    transform: skewX(30deg) translate(150%, -50%);
+    transition-delay: 0.1s;
+}
+
+.btn1:active {
+    transform: scale(0.9);
 }
 </style>
 
-  <h1 class="h1">Subscribe For Personilized Content</h1>
+  <h1 class="h1">Opps! looks like you haven't Subscribed</h1>
 
   <ul>
     <div class="container">
         <div class="center">
          <form class="form-inline">
-            <button class="btn" type="submit"><a href="/subscribe">Subscribe Now</button>
-         </form>
+          <button class="btn1" onclick = "window.location.href='/subscribe';">Subscribe
+          </form>
         </div>
     </div>
   </ul>
