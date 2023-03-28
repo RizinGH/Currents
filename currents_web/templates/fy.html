@@ -72,6 +72,16 @@ h1 {text-align: center;}
 .btn1:active {
     transform: scale(0.9);
 }
+
+.btn-a {
+  text-decoration: none !important;
+  color: inherit !important; 
+  display: inline-block; 
+  position: relative; 
+  z-index: 1; 
+  padding: 2em; 
+  margin: -2em;
+}
 </style>
 
   <h1 class="h1">Opps! looks like you haven't Subscribed</h1>
@@ -80,7 +90,10 @@ h1 {text-align: center;}
     <div class="container">
         <div class="center">
          <form class="form-inline">
-          <button class="btn1" onclick = "window.location.href='/subscribe';">Subscribe
+          <a href="{% url 'subscribe' %}" class="btn-a">
+            <button class="btn1">Subscribe
+          </a>
+
           </form>
         </div>
     </div>

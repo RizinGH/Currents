@@ -80,6 +80,16 @@
 .btn:active {
  transform: scale(0.9);
 }
+
+.btn-a {
+  text-decoration: none !important;
+  color: inherit !important; 
+  display: inline-block; 
+  position: relative; 
+  z-index: 1; 
+  padding: 2em; 
+  margin: -2em;
+}
 </style>
 
 <div class="split-screen">
@@ -88,7 +98,10 @@
   </div>
   <div class="right-pane">
     <h2 class="h2"></br></br></br></br>Stay informed and connected with Currents. Sign up today and start exploring the latest news from around the world.</br></br></h2>
-    <button class="btn" onclick = "window.location.href='/register';">Register Now !
+    <a href="{% url 'register' %}" class="btn-a">
+      <button class="btn">Register Now !
+    </a>
+    
     </button>
   </div>
 </div>
