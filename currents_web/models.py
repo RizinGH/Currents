@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 # user details
 class UserDetails(models.Model):
-       user = models.ForeignKey(
+       user = models.OneToOneField(
               User, 
               to_field="email", 
               on_delete=models.CASCADE, 
@@ -51,7 +51,7 @@ class UserDetails(models.Model):
 
 # subscription details
 class Subscription(models.Model):
-       user = models.ForeignKey(
+       user = models.OneToOneField(
               User,
               to_field='email',
               primary_key=True,
@@ -81,6 +81,7 @@ class Favourites(models.Model):
        )
 
        title = models.CharField(
+              max_length=100,
               null=False
        )
 

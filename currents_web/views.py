@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from .forms import RegistrationForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 
 
@@ -46,12 +45,11 @@ def userLogout(request):
     return redirect('login')
     
     
-
 def register(request):
     if request.method =="POST":
         username = request.POST['username']
         email = request.POST['email']
-        password = request.POST['password']
+        password = make_password(request.POST['password'])
 
         if User.objects.filter(email=email).count():
             messages.error(request, "Account with email already exists!!")
@@ -59,7 +57,7 @@ def register(request):
         else:
             user = User(email, password)
             user.save()
-            UserDetails(email=user, username=username).save()
+            UserDetails(user=user, username=username).save()
             messages.success(request, "Registered Successfully")
             return render(request, "currents_web/register.html")
 

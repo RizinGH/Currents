@@ -38,3 +38,6 @@ admin.site.unregister(Group)
 # Register your models here.
 admin.site.register(User)
 admin.site.register(UserDetails)
+admin.site.register(Subscription)
+admin.site.register(Favourites)
+admin.site.register(Report)
