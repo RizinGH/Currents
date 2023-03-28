@@ -2,8 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import RegistrationForm
 from .models import *
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth import login
 
 
 def index(request):
@@ -22,8 +22,30 @@ def subscribe(request):
     return render(request, "currents_web/subscribe.html")
 
 
-def login(request):
+def userLogin(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    else:
+        if request.method =="POST":
+            email = request.POST.get('email') 
+            password = request.POST.get('password')
+
+            user = authenticate(request, email=email, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('dashboard')
+            else:
+                messages.error(request, 'Invalid Email/Password')
+                return render(request, 'currents_web/login.html')
+         
     return render(request, "currents_web/login.html")
+
+def userLogout(request):
+    logout(request)
+    return redirect('login')
+    
+    
 
 def register(request):
     if request.method =="POST":
@@ -40,15 +62,6 @@ def register(request):
             UserDetails(email=user, username=username).save()
             messages.success(request, "Registered Successfully")
             return render(request, "currents_web/register.html")
-
-    #     form = RegistrationForm(request.POST['email'], request.POST['password'])
-    #     if form.is_valid():
-    #         user = form.save()
-    #         login(request ,user)
-    #         messages.success(request, "Sign-Up SuccessFull")
-    #         return redirect("home")
-    #     messages.error(request, "Sign-Up Failed")
-    # form = RegistrationForm()
 
     return render(request = request, template_name="currents_web/register.html", context={})
 
