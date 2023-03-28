@@ -7,138 +7,92 @@
 
 {% block content %}
 <style>                
-div.scroll {
-  overflow: auto;
+
+body {
+    background-color: #eee
 }
 
+.card {
+    border: none;
+    border-radius: 10px
+}
+
+.c-details span {
+    font-weight: 300;
+    font-size: 13px
+}
+
+.badge span {
+    background-color: #fffbec;
+    width: 30px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: #fed85d;
+    justify-content: center;
+    align-items: center
+}
+
+.progress {
+    height: 10px;
+    border-radius: 10px
+}
+
+.progress div {
+    background-color: red
+}
+
+.text1 {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.text2 {
+    color: #a5aec0
+}
 </style>
 
-  <h1>Today's Briefing....</br></h1>
-  <div class="scroll">
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news1</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news2</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news3</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news4</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
+  <h1>Today's Briefing</h1>
+  <div class="container d-flex flex-wrap align-items-center">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
       </div>
     </div>
   </div>
-  </div>
+</hr>
 
-
-  <h2>Category 1</h2>
-  
-  <div class="scroll">
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news1</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news2</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news3</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news4</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
+<h1>Cater</h1>
+<div class="container d-flex flex-wrap align-items-center">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
     </div>
   </div>
-  </div>
+</div>
+<hr>
 
-    <h2>Category 2</h2>
-    <div class="scroll">
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news1</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
+<h1>Today's Briefing</h1>
+<div class="container d-flex flex-wrap align-items-center">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
     </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news2</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news3</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">news4</h5>
-          <p class="card-text">fetch news</p>
-          <a href="#" class="btn btn-primary">read more</a>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
+
 
 {% endblock %}
