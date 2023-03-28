@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .forms import NewUserForm
+from .forms import RegistrationForm
+from .models import *
 from django.contrib import messages
 from django.contrib.auth import login
 
@@ -26,15 +27,18 @@ def login(request):
 
 def register(request):
     if request.method =="POST":
-        form = NewUserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request ,user)
-            messages.success(request, "Sign-Up SuccessFull")
-            return redirect("home")
-        messages.error(request, "Sign-Up Failed")
-    form = NewUserForm()
-    return render(request = request, template_name="currents_web/register.html", context={"register_form":form})
+        User(request.POST['email'], request.POST['password']).save()
+
+        UserDetails()
+    #     form = RegistrationForm(request.POST['email'], request.POST['password'])
+    #     if form.is_valid():
+    #         user = form.save()
+    #         login(request ,user)
+    #         messages.success(request, "Sign-Up SuccessFull")
+    #         return redirect("home")
+    #     messages.error(request, "Sign-Up Failed")
+    # form = RegistrationForm()
+    return render(request = request, template_name="currents_web/register.html", context={})
 
 def about(request):
     pass
