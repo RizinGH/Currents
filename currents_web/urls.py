@@ -10,9 +10,10 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('weather/', views.weather, name='weather'),
-    path('login/', views.login, name='login'),
+    path('login/', views.userLogin, name='login'),
+    path('logout/', views.userLogout, name='logout'),
     path('register/', views.register, name='register'),
-    path('subscribe/',views.subscribe,name='subscribe'),
-    path('about/',views.about,name='about'),
+    path('subscribe/', views.subscribe, name='subscribe'),
+    path('about/', views.about, name='about'),
 
 ]
