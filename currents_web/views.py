@@ -13,19 +13,6 @@ def index(request):
     
     return render(request, "index.html")
 
-def home(request):
-    return render(request, "home.html")
-
-def fy(request):
-    return render(request, "fy.html")
-
-def profile(request):
-    return render(request, "profile.html")
-
-def subscribe(request):
-    return render(request, "subscribe.html")
-
-
 def userLogin(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
@@ -83,13 +70,8 @@ def change_password(request):
         User.objects.filter(email=request.POST['email']).update(password=make_password(new_password))
 
         return redirect('login')
-    
-def about(request):
-    pass
 
-def weather(request):
-    pass
-
+@login_required(login_url='login')
 def dashboard(request):
     google_news = GNews(language='en', country='IN', period='7d', max_results=5)
 
@@ -104,3 +86,33 @@ def dashboard(request):
     }
 
     return render(request, "dashboard.html", {"news": news})
+
+def profile(request):
+    
+    if request.method == "POST":
+        # email = request.POST['email']
+        username = request.POST['username']
+        preference = request.POST['preference']
+
+        UserDetails.objects.filter(user=request.user).update(username=username, userPreferences=preference)
+
+    user_details = UserDetails.objects.filter(user=request.user).first()
+    
+    return render(request, "profile.html", {'user_details': user_details})
+
+
+def home(request):
+    return render(request, "home.html")
+
+def fy(request):
+    return render(request, "fy.html")
+
+
+def subscribe(request):
+    return render(request, "subscribe.html")
+
+def about(request):
+    pass
+
+def weather(request):
+    pass
