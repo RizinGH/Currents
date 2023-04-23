@@ -2,20 +2,30 @@
 {% load static %}
 
 {% block title %}
-  Currents
+  profile
 {% endblock %}
 
 
 {% block content %}
+<style>
+   .form-control
+    {
+    border-radius: 25px;
+    padding: 20px; 
+    width: 400px;
+    height: 15px;   
+   }
 
+</style>
         <div class="p-3 py-5">
             <form method="post">
                 {% csrf_token %}
+                <center>
                 <div class="d-flex justify-content-left align-items-center mb-3">
                     <h4 class="text" style="font-weight: bold">Profile</h4>
                 </div>
 
-                <div class="row mt-4">
+                <div class="row mt-1">
                     <div class="col-md-6"><label class="labels">Email ID</label><input type="text" class="form-control" value="{{user_details.user}}" name="email" required readonly></div>
                 </div>
 
@@ -27,6 +37,7 @@
                     <div class="col-md-6"><label class="labels">Preference</label><input type="text" class="form-control" value="{{user_details.userPreferences}}" name="preference"></div>
                 </div>
                 <div class="mt-5 text-center"><button class="btn" type="submit">Save Profile</button></div>
-            </div>
+                </center>
+        </div>
         </form>
 {% endblock %}

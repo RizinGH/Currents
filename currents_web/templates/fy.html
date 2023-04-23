@@ -1,19 +1,23 @@
 {% extends "./user_base.html" %}
 
 {% block title %}
-  Currents
+foryou
 {% endblock %}
 
 
 {% block content %}
 <style>
-h1 {text-align: center;}
-.container {
+  h1 {
+    text-align: center;
+    font-family: "Candara", sans-serif;
+  }
+
+  .container {
     height: 200px;
     position: relative;
-    }
+  }
 
-.center {
+  .center {
     position: absolute;
     top: 150%;
     left: 50%;
@@ -21,33 +25,32 @@ h1 {text-align: center;}
     transform: translate(-50%, -50%);
   }
 
-.h1
-{
-  position: absolute;
-  top: 40%;
-   left: 50%;
-   -ms-transform: translate(-50%, -50%);
-   transform: translate(-50%, -50%);
-   font-family:"Candara", sans-serif;
-}
+  .h1 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-family: "Candara", sans-serif;
+  }
 
-.btn1 {
-      padding: 1.1em 2em;
-      background: none;
-      border: 2px solid #fff;
-      font-size: 15px;
-      color: #131313;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s;
-      border-radius: 12px;
-      background-color: #ffffff;
-      font-weight: bolder;
-      box-shadow: 0 2px 0 2px #000;
-}
+  .btn1 {
+    padding: 1.1em 2em;
+    background: none;
+    border: 2px solid #fff;
+    font-size: 15px;
+    color: #131313;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    border-radius: 12px;
+    background-color: #ffffff;
+    font-weight: bolder;
+    box-shadow: 0 2px 0 2px #000;
+  }
 
-.btn1:before {
+  .btn1:before {
     content: "";
     position: absolute;
     width: 100px;
@@ -56,46 +59,46 @@ h1 {text-align: center;}
     top: 50%;
     transform: skewX(30deg) translate(-150%, -50%);
     transition: all 0.5s;
-}
+  }
 
-.btn1:hover {
+  .btn1:hover {
     background-color: #000000;
     color: #fff;
     box-shadow: 0 2px 0 2px #000000;
-}
+  }
 
-.btn1:hover::before {
+  .btn1:hover::before {
     transform: skewX(30deg) translate(150%, -50%);
     transition-delay: 0.1s;
-}
+  }
 
-.btn1:active {
+  .btn1:active {
     transform: scale(0.9);
-}
+  }
 
-.btn-a {
-  text-decoration: none !important;
-  color: inherit !important; 
-  display: inline-block; 
-  position: relative; 
-  z-index: 1; 
-  padding: 2em; 
-  margin: -2em;
-}
+  .btn-a {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    padding: 2em;
+    margin: -2em;
+  }
 </style>
 
-  <h1 class="h1">Opps! looks like you haven't Subscribed</h1>
+<h1 class="h1">Opps! looks like you haven't Subscribed</h1>
 
-  <ul>
-    <div class="container">
-        <div class="center">
-         <form class="form-inline">
-          <a href="{% url 'subscribe' %}" class="btn-a">
-            <button class="btn1">Subscribe
-          </a>
+<ul>
+  <div class="container">
+    <div class="center">
+      <form class="form-inline">
+        <a href="{% url 'subscribe' %}" class="btn-a">
+          <button class="btn1">Subscribe
+        </a>
 
-          </form>
-        </div>
+      </form>
     </div>
-  </ul>
+  </div>
+</ul>
 {% endblock %}

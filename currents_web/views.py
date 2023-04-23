@@ -112,7 +112,12 @@ def subscribe(request):
     return render(request, "subscribe.html")
 
 def about(request):
-    pass
+    return render(request, "about.html")
 
 def weather(request):
     pass
+
+def handle_form_submission(request):
+    messages.success(request, 'Payment was successful!')
+    return redirect('fy')  # assuming you have a success page URL named 'success' in your app's urls.py
+    return render(request, 'payment/fy.html')

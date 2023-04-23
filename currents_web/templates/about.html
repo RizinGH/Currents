@@ -1,0 +1,52 @@
+{% extends "./index_base.html" %}
+
+{% block title %}
+about
+{% endblock %}
+
+
+{% block content %}
+<style>
+  .split-screen {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    margin-top: 2%;
+  }
+
+  .left-pane {
+    flex-basis: 50%;
+    background-color: #000000;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .right-pane {
+    flex-basis: 50%;
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .h1 {
+    color: #ffffff;
+    font-family: Google Sans, Helvetica Neue, sans-serif
+  }
+
+  .h2 {
+    color: #000000;
+    font-family: "Candara", sans-serif;
+  }
+</style>
+<div class="split-screen">
+  <div class="left-pane">
+    <h2 class="h1"><br><br><br><br>Developed as a part of Software Development Project at KristuJayanti
+      College<br><br><br><br></h2>
+  </div>
+  <div class="right-pane">
+    <h2 class="h2"></br></br></br></br>For Queries<br>Contact:<br>22mcaa02@kristujayanti.com</h2>
+
+    </button>
+  </div>
+</div>
+{% endblock %}
