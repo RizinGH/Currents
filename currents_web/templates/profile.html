@@ -1,43 +1,61 @@
 {% extends "./user_base.html" %}
+{% load custom_tags %}
 {% load static %}
 
 {% block title %}
-  profile
+profile
 {% endblock %}
 
 
 {% block content %}
 <style>
-   .form-control
-    {
-    border-radius: 25px;
-    padding: 20px; 
-    width: 400px;
-    height: 15px;   
-   }
+    .inp-cust {
+        border: 1px solid grey;
+        border-radius: 25px !important;
+        padding: 20px !important;
+        width: 400px !important;
+        height: 15px !important;
+    }
 
+    .multiselect-dropdown {
+        width: 400px !important;
+        border-radius: 25px;
+        padding: 8px 15px;
+    }
 </style>
-        <div class="p-3 py-5">
-            <form method="post">
-                {% csrf_token %}
-                <center>
-                <div class="d-flex justify-content-left align-items-center mb-3">
-                    <h4 class="text" style="font-weight: bold">Profile</h4>
-                </div>
-
-                <div class="row mt-1">
-                    <div class="col-md-6"><label class="labels">Email ID</label><input type="text" class="form-control" value="{{user_details.user}}" name="email" required readonly></div>
-                </div>
-
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" value="{{user_details.username}}" name="username" required></div>
-                </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Preference</label><input type="text" class="form-control" value="{{user_details.userPreferences}}" name="preference"></div>
-                </div>
-                <div class="mt-5 text-center"><button class="btn" type="submit">Save Profile</button></div>
-                </center>
+<div class="p-3 py-5 d-flex justify-content-center">
+    <form method="post">
+        {% csrf_token %}
+        <div class="d-flex justify-content-left align-items-center mb-3">
+            <h4 class="text" style="font-weight: bold">Profile</h4>
         </div>
-        </form>
+
+        <div class="row mt-1">
+            <div class="col-md-6"><label class="labels">Email ID</label><input type="text" class="inp-cust"
+                    value="{{user_details.user}}" name="email" required readonly></div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-6"><label class="labels">Name</label><input type="text" class="inp-cust"
+                    value="{{user_details.username}}" name="username" required></div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <label class="labels">Preference</label>
+                <select name="preference" id="preference" class="inp-cust" multiple multiselect-search="true"  multiselect-select-all="false" multiselect-max-items="10" onselect="checkSel(this);">
+                        {% get_list user_details.userPreferences as preference %}
+                        <option value="top_news" {% if "top_news" in preference %} selected {% endif %}>top_news</option>
+                        <option value="world_news" {% if "world_news" in preference %} selected {% endif %}>world_news</option>
+                        <option value="business" {% if "business" in preference %} selected {% endif %}>business</option>
+                        <option value="technology" {% if "technology" in preference %} selected {% endif %}>technology</option>
+                        <option value="entertainment" {% if "entertainment" in preference %} selected {% endif %}>entertainment</option>
+                        <option value="sports" {% if "sports" in preference %} selected {% endif %}>sports</option>
+                        <option value="science " {% if "science" in preference %} selected {% endif %}>science</option>
+                </select>
+            </div>
+        </div>
+        <div class="mt-5 text-center"><button class="btn" type="submit">Save Profile</button></div>
+</div>
+</form>
 {% endblock %}
