@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib.auth import authenticate, login, logout
@@ -5,6 +6,8 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from gnews import GNews
+from datetime import date
+import json
 
 
 def index(request):
@@ -73,17 +76,26 @@ def change_password(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    google_news = GNews(language='en', country='IN', period='7d', max_results=5)
+    news_file = f"{date.today()}_all_news.json"
 
-    news = {
-        'top_news': google_news.get_top_news(),
-        'world_news': google_news.get_news_by_topic("WORLD"),
-        'business': google_news.get_news_by_topic("BUSINESS"),
-        'technology': google_news.get_news_by_topic("TECHNOLOGY"),
-        'entertainment': google_news.get_news_by_topic("ENTERTAINMENT"),
-        'sports': google_news.get_news_by_topic("SPORTS"),
-        'science': google_news.get_news_by_topic("SCIENCE"),
-    }
+    if not os.path.exists(news_file):
+        google_news = GNews(language='en', country='IN', period='7d', max_results=5)
+
+        news = {
+            'top_news': google_news.get_top_news(),
+            'world_news': google_news.get_news_by_topic("WORLD"),
+            'business': google_news.get_news_by_topic("BUSINESS"),
+            'technology': google_news.get_news_by_topic("TECHNOLOGY"),
+            'entertainment': google_news.get_news_by_topic("ENTERTAINMENT"),
+            'sports': google_news.get_news_by_topic("SPORTS"),
+            'science': google_news.get_news_by_topic("SCIENCE"),
+        }
+
+        with open(news_file, 'w') as outfile:
+            json.dump(news, outfile)
+    else:
+        with open(news_file, 'r') as infile:
+            news = json.load(infile)
 
     return render(request, "dashboard.html", {"news": news})
 
