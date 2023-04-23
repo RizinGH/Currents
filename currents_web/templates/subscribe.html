@@ -93,7 +93,7 @@ Currents
 		<div class="col-sm-12">
 			<div class="card mx-auto">
 				<p class="heading" style="color: rgb(0, 0, 0);"><b>PAYMENT DETAILS</b></p>
-				<form class="form1" action="{% url 'fy' %}" method="post" onsubmit="return onSubmit()">
+				<form class="form1" method="post" onsubmit="return onSubmit()">
 					{% csrf_token %}
 					<div class="form-group mb-0">
 						<p class="text-warning ">Card Number</p>
@@ -120,20 +120,17 @@ Currents
 							<div class="col-sm-5 pt-0" id="paymentForm" method="post">
 								<button type="submit" class="btn2"><b>Subscribe</b></button>
 							</div>
-							{% if messages %}
-							<div class="card">
-								<div class="card-body">
-									{% for message in messages %}
-									<div class="alert alert-success">{{ message }}</div>
-									{% endfor %}
-								</div>
-							</div>
-							{% endif %}
 						</div>
 					</div>
+					{% if msg %}
+					<div class="alert alert-success mt-3" role="alert">
+						Payment Successful
+					</div>
+					{% endif %}
 				</form>
 			</div>
 		</div>
+
 	</div>
 </div>
 

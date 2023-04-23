@@ -107,8 +107,9 @@ def home(request):
 def fy(request):
     return render(request, "fy.html")
 
-
 def subscribe(request):
+    if request.method == 'POST':
+        return render(request, "subscribe.html", {'msg': 'success'})
     return render(request, "subscribe.html")
 
 def about(request):
@@ -117,7 +118,3 @@ def about(request):
 def weather(request):
     pass
 
-def handle_form_submission(request):
-    messages.success(request, 'Payment was successful!')
-    return redirect('fy')  # assuming you have a success page URL named 'success' in your app's urls.py
-    return render(request, 'payment/fy.html')
