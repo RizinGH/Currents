@@ -8,7 +8,8 @@ from django.contrib import messages
 from gnews import GNews
 from datetime import date
 import json
-
+from decouple import config
+import requests
 
 def index(request):
     if request.user.is_authenticated:
@@ -117,9 +118,37 @@ def home(request):
     return render(request, "home.html")
 
 def fy(request):
+    # if already subscibed
+    if Subscription.objects.filter(user=request.user).first():
+        preferences = UserDetails.objects.get(user = request.user).userPreferences
+        preferences = preferences.strip('][').replace("'", "").replace(" ", "").split(',')
+
+        news_file = f"{date.today()}_{request.user}_all_news.json"
+
+        if not os.path.exists(news_file):
+            google_news = GNews(language='en', country='IN', period='7d', max_results=5)
+            news = {
+                'top_news': google_news.get_top_news(),
+            }
+            for category in preferences:
+                news[category] = google_news.get_news_by_topic(category)
+            
+            with open(news_file, 'w') as outfile:
+                json.dump(news, outfile)
+        
+        else:
+            with open(news_file, 'r') as infile:
+                news = json.load(infile)
+
+        return render(request, "fy.html", {'news': news})
+
     return render(request, "fy.html")
 
 def subscribe(request):
+    # if already subscibed
+    if Subscription.objects.filter(user=request.user).first():
+        return redirect('fy')
+    
     if request.method == 'POST':
         Subscription(user = request.user, date = date.today(), amount = 199, payment_mode='card').save()
         return render(request, "subscribe.html", {'msg': 'success'})
@@ -129,5 +158,13 @@ def about(request):
     return render(request, "about.html")
 
 def weather(request):
-    pass
+    lat = 12.9716
+    lon = 77.5946
+    ow_api = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={config('OW_API_KEY')}"
+
+    print(ow_api)
+    resp = requests.get(ow_api)
+    print(resp.json())
+
+    return render(request, 'weather.html')
 

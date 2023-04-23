@@ -45,8 +45,7 @@ profile
                 <label class="labels">Preference</label>
                 <select name="preference" id="preference" class="inp-cust" multiple multiselect-search="true"  multiselect-select-all="false" multiselect-max-items="10" onselect="checkSel(this);">
                         {% get_list user_details.userPreferences as preference %}
-                        <option value="top_news" {% if "top_news" in preference %} selected {% endif %}>top_news</option>
-                        <option value="world_news" {% if "world_news" in preference %} selected {% endif %}>world_news</option>
+                        <option value="world" {% if "world" in preference %} selected {% endif %}>world_news</option>
                         <option value="business" {% if "business" in preference %} selected {% endif %}>business</option>
                         <option value="technology" {% if "technology" in preference %} selected {% endif %}>technology</option>
                         <option value="entertainment" {% if "entertainment" in preference %} selected {% endif %}>entertainment</option>
