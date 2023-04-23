@@ -104,10 +104,10 @@ def profile(request):
     if request.method == "POST":
         # email = request.POST['email']
         username = request.POST['username']
-        preference = request.POST['preference']
+        preference = request.POST.getlist('preference')
 
         UserDetails.objects.filter(user=request.user).update(username=username, userPreferences=preference)
-
+        
     user_details = UserDetails.objects.filter(user=request.user).first()
     
     return render(request, "profile.html", {'user_details': user_details})
