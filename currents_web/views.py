@@ -121,6 +121,7 @@ def fy(request):
 
 def subscribe(request):
     if request.method == 'POST':
+        Subscription(user = request.user, date = date.today(), amount = 199, payment_mode='card').save()
         return render(request, "subscribe.html", {'msg': 'success'})
     return render(request, "subscribe.html")
 

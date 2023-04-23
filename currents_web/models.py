@@ -68,6 +68,9 @@ class Subscription(models.Model):
               max_length=10
        )
 
+       def __str__(self):
+              return self.user
+
 # saved articles
 class Favourites(models.Model):
        id = models.AutoField(
@@ -90,6 +93,9 @@ class Favourites(models.Model):
               max_length=500
        )
 
+       def __str__(self):
+              return self.id, self.user
+
 # report
 class Report(models.Model):
        id = models.AutoField(
@@ -107,3 +113,6 @@ class Report(models.Model):
        total_subscribers = models.IntegerField(
               null=False
        )
+
+       def __str__(self):
+              return self.id
