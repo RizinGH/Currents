@@ -1,0 +1,38 @@
+{% extends "./user_base.html" %}
+{% load custom_tags %}
+{% load static %}
+
+{% block title %}
+Favourites
+{% endblock %}
+
+
+{% block content %}
+<div class="pagetitle pt-3">
+    <nav style="background-color: #212121;">
+      <ol class="breadcrumb" style="background-color: #212121;">
+        <li class="breadcrumb-item h5 text-secondary"><a>Favourites</a></li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  <div class="card-deck col-md-12 justify-content-center">
+    {% for fav in favourites %}
+    <div class="card col-md-3" style="border: 1px solid #212121;">
+      <div class="card-header text-center ">{{fav.title}}
+      </div>
+      <div class="card-footer text-center">
+        <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
+        <a href="{{fav.url}}" class="card-link text-muted" target="_blank">Read</a>
+      </div>
+    </div>
+    <!-- <div class="card" style="width: 18rem; border: 1px solid grey;">
+            <div class="card-body">
+              <h5 class="card-title">{{article.title}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted"><a href="{{article.publisher.href}}" class="card-link">{{article.publisher.title}}</a></h6>
+              <p class="card-text">{{article.description}}</p>
+              <a href="{{article.url}}" class="card-link">Read More</a>
+            </div>
+          </div> -->
+    {% endfor %}
+  </div>
+{% endblock %}

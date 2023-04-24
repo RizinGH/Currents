@@ -1,5 +1,6 @@
 import os
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
@@ -162,6 +163,9 @@ def about(request):
     return render(request, "about.html")
 
 def weather(request):
+    if not Subscription.objects.filter(user=request.user).first():
+        return redirect('weather')
+    
     lat = 12.9762
     lon = 77.6033
     ow_api = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={config('OW_API_KEY')}"
@@ -180,3 +184,17 @@ def weather(request):
 def metal_rates(request):
 
     metal_price_api = f"https://api.metalpriceapi.com/v1/latest?api_key={config('METAL_PRICE_API_KEY')}&base=INR"
+
+def set_favourite(request):
+    title = request.POST['title']
+    url = request.POST['url']
+
+    Favourites(user=request.user, title=title, url=url).save()
+
+    return HttpResponse("success")
+
+def favourites(request):
+    params = {
+        'favourites': Favourites.objects.all()
+    }
+    return render(request, 'favourites.html', params)

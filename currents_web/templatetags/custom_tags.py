@@ -14,3 +14,7 @@ def get_list(s):
 @register.simple_tag(name='convert_degree')
 def convert_degree(kelvin):
     return round(kelvin -  273.15, 2)
+
+@register.simple_tag(name='to_str')
+def to_str(s):
+    return str(s)

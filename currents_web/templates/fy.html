@@ -139,7 +139,7 @@ foryou
   <div class="card" style="border: 1px solid #212121;">
     <div class="card-header text-center">{{article.publisher.title}}
       <div>
-        <input class="star" type="checkbox" checked>
+        <input class="star" data-title="{{article.title}}" data-url="{{article.url}}" type="checkbox" onclick="favourite(this)" checked>
       </div>
     </div>
     <div class="card-body">
@@ -164,4 +164,22 @@ foryou
 </hr>
 {% endfor %}
 {% endif %}
+<script>
+  function favourite(data){
+    var title = data.getAttribute("data-title");
+    var url = data.getAttribute("data-url");
+
+    post_data = {
+      csrfmiddlewaretoken: "{{ csrf_token }}",
+      title: title,
+      url: url,
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'set_favourite' %}",
+      data: post_data
+    })
+  }
+</script>
 {% endblock %}

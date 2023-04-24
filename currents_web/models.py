@@ -94,7 +94,7 @@ class Favourites(models.Model):
        )
 
        def __str__(self):
-              return self.id, self.user
+              return f"[{self.user}] - {self.title}"
 
 # report
 class Report(models.Model):
