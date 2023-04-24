@@ -1,9 +1,27 @@
 {% extends "./user_base.html" %}
-{% load custom_tags %}
+<!--{% load custom_tags %}-->
 
 {% block title %}
 Weather
 {% endblock %}
+<div class="container-fluid">
+    <section class="main">
+      <section class="inputs">
+        <input type="text" placeholder="Enter any city..." id="cityinput">
+        <input type="submit" value="Submit" id="add">
+        <button placeholder="submit" id="add"></button>
+      </section>
 
+      <section class="display">
+        <div class="wrapper">
+          <h2 id="cityoutput"></h2>
+          <p id="description"></p>
+          <p id="temp"></p>
+          <p id="wind"></p>
+        </div>
+      </section>
+    </section>
+
+  </div>
 {% block content %}
 {% endblock %}
