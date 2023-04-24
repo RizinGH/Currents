@@ -10,3 +10,7 @@ def trim_desc(s):
 def get_list(s):
     s = s.strip('][').replace("'", "").replace(" ", "").split(',')
     return s
+
+@register.simple_tag(name='convert_degree')
+def convert_degree(kelvin):
+    return round(kelvin -  273.15, 2)

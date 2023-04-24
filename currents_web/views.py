@@ -6,9 +6,9 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from gnews import GNews
-from datetime import date
+from datetime import date, datetime
 import json
-#from decouple import config
+from decouple import config
 import requests
 
 def index(request):
@@ -157,13 +157,18 @@ def about(request):
     return render(request, "about.html")
 
 def weather(request):
-    #lat = 12.9716
-    #lon = 77.5946
-    #ow_api = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={config('OW_API_KEY')}"
-    #print(ow_api)
-    #resp = requests.get(ow_api)
-    #print(resp.json())
+    lat = 12.9762
+    lon = 77.6033
+    ow_api = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={config('OW_API_KEY')}"
+    print(ow_api)
+    resp = requests.get(ow_api)
+    print(resp.json())
 
-    return render(request, 'weather.html')
+    params = {
+        'wjson': resp.json(), 
+        'today': date.today(),
+        'day': datetime.now().strftime('%A'),
+    }
+    return render(request, 'weather.html', params)
     
 
