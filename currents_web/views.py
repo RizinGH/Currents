@@ -78,7 +78,6 @@ def change_password(request):
 @login_required(login_url='login')
 def dashboard(request):
     news_file = f"{date.today()}_all_news.json"
-
     if not os.path.exists(news_file):
         google_news = GNews(language='en', country='IN', period='7d', max_results=5)
 
