@@ -106,6 +106,11 @@ def profile(request):
         username = request.POST['username']
         preference = request.POST.getlist('preference')
 
+        news_file = f"{date.today()}_{request.user}_all_news.json"
+
+        if os.path.exists(news_file):
+            os.remove(news_file)
+
         UserDetails.objects.filter(user=request.user).update(username=username, userPreferences=preference)
         
     user_details = UserDetails.objects.filter(user=request.user).first()
@@ -172,3 +177,6 @@ def weather(request):
     return render(request, 'weather.html', params)
     
 
+def metal_rates(request):
+
+    metal_price_api = f"https://api.metalpriceapi.com/v1/latest?api_key={config('METAL_PRICE_API_KEY')}&base=INR"
