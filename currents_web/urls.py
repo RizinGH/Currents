@@ -18,5 +18,7 @@ urlpatterns = [
     path('change_password/',views.change_password, name='change_password'),
     path('set_favourite/',views.set_favourite, name='set_favourite'),
     path('favourites/',views.favourites, name='favourites'),
+    path('metal_rates/', views.metal_rates, name="metal_rates"),
+    path('subscription/', views.subscription, name='subscription'),
 
 ]

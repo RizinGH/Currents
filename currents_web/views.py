@@ -1,6 +1,6 @@
 import os
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
@@ -182,8 +182,11 @@ def weather(request):
     
 
 def metal_rates(request):
+    return render(request,'metal_rates.html')
+   # metal_price_api = f"https://api.metalpriceapi.com/v1/latest?api_key={config('METAL_PRICE_API_KEY')}&base=INR"
 
-    metal_price_api = f"https://api.metalpriceapi.com/v1/latest?api_key={config('METAL_PRICE_API_KEY')}&base=INR"
+   # resp = requests.get(metal_price_api)
+   # return JsonResponse(resp.json())
 
 def set_favourite(request):
     title = request.POST['title']
@@ -198,3 +201,6 @@ def favourites(request):
         'favourites': Favourites.objects.all()
     }
     return render(request, 'favourites.html', params)
+
+def subscription(request):
+    return render(request, 'subscription.html')
