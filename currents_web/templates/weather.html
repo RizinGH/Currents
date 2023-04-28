@@ -159,22 +159,6 @@ Weather
   }
 </style>
 
-{% if not wjson %}
-<h1 class="h1">Opps! looks like you haven't Subscribed</h1>
-
-<ul>
-  <div class="container">
-    <div class="center">
-      <form class="form-inline">
-        <a href="{% url 'subscribe' %}" class="btn-a">
-          <button class="btn1">Subscribe
-        </a>
-
-      </form>
-    </div>
-  </div>
-</ul>
-{% else %}
 <div class="page-content page-container" id="page-content">
   <div class="padding">
     <div class="row container d-flex justify-content-center">
@@ -210,7 +194,6 @@ Weather
     </div>
   </div>
 </div>
-{% endif %}
 
 
 

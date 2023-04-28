@@ -109,22 +109,6 @@ foryou
 
   }
 </style>
-{% if not news %}
-<h1 class="h1">Opps! looks like you haven't Subscribed</h1>
-
-<ul>
-  <div class="container">
-    <div class="center">
-      <form class="form-inline">
-        <a href="{% url 'subscribe' %}" class="btn-a">
-          <button class="btn1">Subscribe
-        </a>
-
-      </form>
-    </div>
-  </div>
-</ul>
-{% else %}
 {% for category, articles in news.items %}
 <div class="pagetitle pt-3">
   <nav style="background-color: #212121;">
@@ -163,7 +147,6 @@ foryou
 </div>
 </hr>
 {% endfor %}
-{% endif %}
 <script>
   function favourite(data){
     var title = data.getAttribute("data-title");

@@ -78,6 +78,14 @@ def change_password(request):
 
 @login_required(login_url='login')
 def dashboard(request):
+    params = {
+        'subscribed': False
+    }
+    
+    # check if subscribed
+    if Subscription.objects.filter(user=request.user).first():
+        params['subscribed'] = True
+
     news_file = f"{date.today()}_all_news.json"
     if not os.path.exists(news_file):
         google_news = GNews(language='en', country='IN', period='7d', max_results=5)
@@ -98,7 +106,10 @@ def dashboard(request):
         with open(news_file, 'r') as infile:
             news = json.load(infile)
 
-    return render(request, "dashboard.html", {"news": news})
+    params['news'] = news
+
+    print(params)
+    return render(request, "dashboard.html", params)
 
 def profile(request):
     
@@ -123,6 +134,10 @@ def home(request):
     return render(request, "home.html")
 
 def fy(request):
+    # check if subscribed
+    if not Subscription.objects.filter(user=request.user).first():
+        return redirect('subscription')
+
     # if already subscibed
     if Subscription.objects.filter(user=request.user).first():
         preferences = UserDetails.objects.get(user = request.user).userPreferences
@@ -145,9 +160,20 @@ def fy(request):
             with open(news_file, 'r') as infile:
                 news = json.load(infile)
 
-        return render(request, "fy.html", {'news': news})
 
-    return render(request, "fy.html")
+    params = {
+        'subscribed': True,
+        'news': news,
+    }
+
+    return render(request, "fy.html", params)
+
+def subscription(request):
+    # if already subscibed
+    if Subscription.objects.filter(user=request.user).first():
+        return redirect('fy')
+    
+    return render(request, 'subscription.html')
 
 def subscribe(request):
     # if already subscibed
@@ -163,8 +189,9 @@ def about(request):
     return render(request, "about.html")
 
 def weather(request):
+    # check if subscribed
     if not Subscription.objects.filter(user=request.user).first():
-        return redirect('weather')
+        return redirect('subscription')
     
     lat = 12.9762
     lon = 77.6033
@@ -174,6 +201,7 @@ def weather(request):
     print(resp.json())
 
     params = {
+        'subscribed': True,
         'wjson': resp.json(), 
         'today': date.today(),
         'day': datetime.now().strftime('%A'),
@@ -182,7 +210,15 @@ def weather(request):
     
 
 def metal_rates(request):
-    return render(request,'metal_rates.html')
+    # check if subscribed
+    if not Subscription.objects.filter(user=request.user).first():
+        return redirect('subscription')
+    
+    params = {
+        'subscribed': True,
+    }
+
+    return render(request,'metal_rates.html', params)
    # metal_price_api = f"https://api.metalpriceapi.com/v1/latest?api_key={config('METAL_PRICE_API_KEY')}&base=INR"
 
    # resp = requests.get(metal_price_api)
@@ -197,10 +233,13 @@ def set_favourite(request):
     return HttpResponse("success")
 
 def favourites(request):
+    # check if subscribed
+    if not Subscription.objects.filter(user=request.user).first():
+        return redirect('subscription')
+    
     params = {
+        'subscribed': True,
         'favourites': Favourites.objects.all()
     }
+    
     return render(request, 'favourites.html', params)
-
-def subscription(request):
-    return render(request, 'subscription.html')
