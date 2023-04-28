@@ -11,6 +11,36 @@ from datetime import date, datetime
 import json
 from decouple import config
 import requests
+from django.conf import settings
+
+SCRAPED_NEWS_DIR = f"{settings.BASE_DIR}{os.path.sep}scraped_news"
+
+# create scraped news dir
+if not os.path.exists(SCRAPED_NEWS_DIR):
+    os.mkdir(SCRAPED_NEWS_DIR)
+
+news_file = os.path.join(SCRAPED_NEWS_DIR, f"{date.today()}_all_news.json")
+# scrape news if not already done
+if not os.path.exists(news_file):
+    google_news = GNews(language='en', country='IN', period='7d', max_results=10)
+
+    news_today = {
+        'top_news': google_news.get_top_news(),
+        'world_news': google_news.get_news_by_topic("WORLD"),
+        'business': google_news.get_news_by_topic("BUSINESS"),
+        'technology': google_news.get_news_by_topic("TECHNOLOGY"),
+        'entertainment': google_news.get_news_by_topic("ENTERTAINMENT"),
+        'sports': google_news.get_news_by_topic("SPORTS"),
+        'science': google_news.get_news_by_topic("SCIENCE"),
+    }
+
+    # save to file
+    with open(news_file, 'w') as outfile:
+        json.dump(news_today, outfile)
+
+else:
+    with open(news_file, 'r') as infile:
+        news_today = json.load(infile)
 
 def index(request):
     if request.user.is_authenticated:
@@ -86,29 +116,11 @@ def dashboard(request):
     if Subscription.objects.filter(user=request.user).first():
         params['subscribed'] = True
 
-    news_file = f"{date.today()}_all_news.json"
-    if not os.path.exists(news_file):
-        google_news = GNews(language='en', country='IN', period='7d', max_results=5)
 
-        news = {
-            'top_news': google_news.get_top_news(),
-            'world_news': google_news.get_news_by_topic("WORLD"),
-            'business': google_news.get_news_by_topic("BUSINESS"),
-            'technology': google_news.get_news_by_topic("TECHNOLOGY"),
-            'entertainment': google_news.get_news_by_topic("ENTERTAINMENT"),
-            'sports': google_news.get_news_by_topic("SPORTS"),
-            'science': google_news.get_news_by_topic("SCIENCE"),
-        }
+    categories = list(news_today.keys())
+    
+    params['categories'] = categories
 
-        with open(news_file, 'w') as outfile:
-            json.dump(news, outfile)
-    else:
-        with open(news_file, 'r') as infile:
-            news = json.load(infile)
-
-    params['news'] = news
-
-    print(params)
     return render(request, "dashboard.html", params)
 
 def profile(request):
@@ -118,7 +130,7 @@ def profile(request):
         username = request.POST['username']
         preference = request.POST.getlist('preference')
 
-        news_file = f"{date.today()}_{request.user}_all_news.json"
+        news_file = os.path.join(SCRAPED_NEWS_DIR, f"{date.today()}_{request.user}_all_news.json")
 
         if os.path.exists(news_file):
             os.remove(news_file)
@@ -143,7 +155,7 @@ def fy(request):
         preferences = UserDetails.objects.get(user = request.user).userPreferences
         preferences = preferences.strip('][').replace("'", "").replace(" ", "").split(',')
 
-        news_file = f"{date.today()}_{request.user}_all_news.json"
+        news_file = os.path.join(SCRAPED_NEWS_DIR, f"{date.today()}_{request.user}_all_news.json")
 
         if not os.path.exists(news_file):
             google_news = GNews(language='en', country='IN', period='7d', max_results=5)
@@ -196,9 +208,9 @@ def weather(request):
     lat = 12.9762
     lon = 77.6033
     ow_api = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={config('OW_API_KEY')}"
-    print(ow_api)
+    # print(ow_api)
     resp = requests.get(ow_api)
-    print(resp.json())
+    # print(resp.json())
 
     params = {
         'subscribed': True,
@@ -243,3 +255,21 @@ def favourites(request):
     }
     
     return render(request, 'favourites.html', params)
+
+def view_news(request, category):
+    params = {
+        'subscribed': False
+    }
+    
+    # check if subscribed
+    if Subscription.objects.filter(user=request.user).first():
+        params['subscribed'] = True
+
+
+    params['news'] = news_today[category]
+    params['category'] = category
+
+    # print(params['news'])
+
+    # print(params)
+    return render(request, "view_news.html", params)

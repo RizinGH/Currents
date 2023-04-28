@@ -20,5 +20,6 @@ urlpatterns = [
     path('favourites/',views.favourites, name='favourites'),
     path('metal_rates/', views.metal_rates, name="metal_rates"),
     path('subscription/', views.subscription, name='subscription'),
+    path('news/<category>', views.view_news, name='view_news'),
 
 ]
