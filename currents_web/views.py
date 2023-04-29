@@ -46,9 +46,13 @@ else:
 @login_required(login_url='login')
 def index(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
-    
-    return render(request, "index.html")
+
+        if request.user.is_superuser:
+            return redirect('admin_dashboard')
+        else:
+            return redirect('dashboard')
+    else:
+        return render(request, "index.html")
 
 def userLogin(request):
     if request.user.is_authenticated:
