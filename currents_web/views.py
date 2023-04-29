@@ -12,6 +12,7 @@ import json
 from decouple import config
 import requests
 from django.conf import settings
+from metalpriceapi.client import Client
 
 SCRAPED_NEWS_DIR = f"{settings.BASE_DIR}{os.path.sep}scraped_news"
 
@@ -215,19 +216,36 @@ def weather(request):
     
 
 def metal_rates(request):
+    metals = {
+        'XAU': 'Gold',
+        'XAG': 'Silver',
+        'XPD': 'Palladium',
+        'XPT': 'Platinum',
+    }
+
+    ounce_in_gms = 0.035274
+
     # check if subscribed
     if not Subscription.objects.filter(user=request.user).first():
         return redirect('subscription')
     
+    metalp_client = client = Client(config('METAL_PRICE_API_KEY'))
+
+    resp = client.fetchLive(base='INR', currencies=list(metals.keys()))
+
+    metal_prices = {}
+
+    for symbol, metal in metals.items():
+        metal_prices[metal] = round(ounce_in_gms / resp['rates'][symbol], 2)
+
     params = {
         'subscribed': True,
+        'metal_prices': metal_prices
     }
 
-    return render(request,'metal_rates.html', params)
-   # metal_price_api = f"https://api.metalpriceapi.com/v1/latest?api_key={config('METAL_PRICE_API_KEY')}&base=INR"
+    
 
-   # resp = requests.get(metal_price_api)
-   # return JsonResponse(resp.json())
+    return render(request, 'metal_rates.html', params)
 
 def set_favourite(request):
     title = request.POST['title']
