@@ -43,6 +43,7 @@ else:
     with open(news_file, 'r') as infile:
         news_today = json.load(infile)
 
+@login_required(login_url='login')
 def index(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
@@ -124,6 +125,7 @@ def dashboard(request):
 
     return render(request, "dashboard.html", params)
 
+@login_required(login_url='login')
 def profile(request):
     params = {
         'subscribed': False
@@ -146,10 +148,7 @@ def profile(request):
     
     return render(request, "profile.html", params)
 
-
-def home(request):
-    return render(request, "home.html")
-
+@login_required(login_url='login')
 def fy(request):
     # check if subscribed
     if not Subscription.objects.filter(user=request.user).first():
@@ -174,6 +173,7 @@ def fy(request):
 
     return render(request, "fy.html", params)
 
+@login_required(login_url='login')
 def subscription(request):
     # if already subscibed
     if Subscription.objects.filter(user=request.user).first():
@@ -181,6 +181,7 @@ def subscription(request):
     
     return render(request, 'subscription.html')
 
+@login_required(login_url='login')
 def subscribe(request):
     # if already subscibed
     if Subscription.objects.filter(user=request.user).first():
@@ -191,9 +192,11 @@ def subscribe(request):
         return render(request, "subscribe.html", {'msg': 'success'})
     return render(request, "subscribe.html")
 
+
 def about(request):
     return render(request, "about.html")
 
+@login_required(login_url='login')
 def weather(request):
     # check if subscribed
     if not Subscription.objects.filter(user=request.user).first():
@@ -214,7 +217,7 @@ def weather(request):
     }
     return render(request, 'weather.html', params)
     
-
+@login_required(login_url='login')
 def metal_rates(request):
     metals = {
         'XAU': 'Gold',
@@ -247,6 +250,7 @@ def metal_rates(request):
 
     return render(request, 'metal_rates.html', params)
 
+@login_required(login_url='login')
 def set_favourite(request):
     title = request.POST['title']
     url = request.POST['url']
@@ -255,6 +259,7 @@ def set_favourite(request):
 
     return HttpResponse("success")
 
+@login_required(login_url='login')
 def favourites(request):
     # check if subscribed
     if not Subscription.objects.filter(user=request.user).first():
@@ -267,6 +272,7 @@ def favourites(request):
     
     return render(request, 'favourites.html', params)
 
+@login_required(login_url='login')
 def view_news(request, category):
     params = {
         'subscribed': False
@@ -285,8 +291,10 @@ def view_news(request, category):
     # print(params)
     return render(request, "view_news.html", params)
 
+@login_required(login_url='login')
 def admin_dashboard(request):
     return render(request, "admin_dashboard.html")
 
+@login_required(login_url='login')
 def manage(request):
-    return render(request, "manage.html")
+    return render(request, "manage_user.html")
