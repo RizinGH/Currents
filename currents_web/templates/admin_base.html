@@ -27,30 +27,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <a class="navbar-brand" href="{% url 'dashboard' %}">
+        <a class="navbar-brand" href="{% url 'admin_dashboard' %}">
           <img src="{% static 'images/currents.png' %}" alt="" height="25" width="30">
         </a>
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'dashboard' %}">Home <span class="sr-only">(current)</span></a>
-        </li>
-        {% if not subscribed %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'subscription' %}">Subscription</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'fy' %}">For you</a>
+          <a class="nav-link" href="{% url 'admin_dashboard' %}">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'weather' %}">Weather</a>
+          <a class="nav-link" href="{% url 'manage' %}">Manage Users</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'favourites' %}">Favourites</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'metal_rates' %}">Metal Rates</a>
-        </li>
-        {% endif %}
     </div>
     <!--<div>
                   <form class="form-inline">

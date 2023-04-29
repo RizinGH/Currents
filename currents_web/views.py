@@ -284,3 +284,9 @@ def view_news(request, category):
 
     # print(params)
     return render(request, "view_news.html", params)
+
+def admin_dashboard(request):
+    return render(request, "admin_dashboard.html")
+
+def manage(request):
+    return render(request, "manage.html")

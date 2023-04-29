@@ -21,5 +21,6 @@ urlpatterns = [
     path('metal_rates/', views.metal_rates, name="metal_rates"),
     path('subscription/', views.subscription, name='subscription'),
     path('news/<category>', views.view_news, name='view_news'),
-
+    path('admin_dashboard/',views.admin_dashboard, name='admin_dashboard'),
+    path('manage/',views.manage, name='manage'),
 ]

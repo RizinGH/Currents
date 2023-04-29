@@ -1,0 +1,145 @@
+{% extends "./admin_base.html" %}
+{% load static %}
+{% block title %}
+Admin Dashboard
+{% endblock %}
+{% block content %}
+
+<style>
+    .one {
+        box-sizing: border-box;
+    }
+
+    .ht {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        overflow: hidden;
+        margin: 30px;
+
+    }
+
+    .panel {
+        width: 750px;
+        height: 400px;
+        background: #838CC7;
+        box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.10);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+        height: 60px;
+        background: #fff;
+    }
+
+    .title {
+        color: #5E6977;
+        font-weight: 500;
+    }
+
+    .piechart {
+        background-image: conic-gradient(rgb(157, 241, 0) 70deg,
+                lightblue 0 235deg,
+                orange 0);
+        border: 2px solid lightgrey;
+        width: 270px;
+        height: 270px;
+        margin: 5% 150px;
+        position: relative;
+        border-radius: 50%;
+        /* color: black; */
+        overflow: hidden;
+        padding-left: 20px;
+    }
+
+    .calendar-views span {
+        font-size: 14px;
+        font-weight: 300;
+        color: #BDC6CF;
+        padding: 6px 14px;
+        border: 2px solid transparent;
+    }
+
+    .panel-body {
+        display: flex;
+        height: 340px;
+    }
+
+    .categories {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-basis: 25%;
+        padding: 39px 0px 41px 26px;
+    }
+
+    .category {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .category span:first-child {
+        font-weight: 300;
+        font-size: 14px;
+        opacity: 0.6;
+        color: #fff;
+        margin-bottom: 6px;
+    }
+
+    .category span:last-child {
+        font-size: 32px;
+        font-weight: 300;
+        color: #fff;
+    }
+</style>
+<br>
+<br>
+<br>
+<div class="row col-md-12 justify-content-center">
+    <div class="one">
+        <div class="ht">
+            <div class="wrapper">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3 class="title">Statistics</h3>
+
+                        <div class="calendar-views">
+                            <span>Day</span>
+                            <span>Week</span>
+                            <span>Month</span>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="categories">
+                            <div class="category">
+                                <span style="color: orange; font-size: 20px;">New Users</span>
+                                <span>0</span>
+                            </div>
+                            <div class="category">
+                                <span style="color: rgb(157, 241, 0); font-size: 20px;">Subscribed Users</span>
+                                <span>0</span>
+                            </div>
+                            <div class="category">
+                                <span style="color: lightblue; font-size: 20px;">Total Users</span>
+                                <span>0</span>
+                            </div>
+                        </div>
+
+                        <div class="piechart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
