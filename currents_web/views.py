@@ -43,6 +43,7 @@ else:
     with open(news_file, 'r') as infile:
         news_today = json.load(infile)
 
+
 @login_required(login_url='login')
 def index(request):
     if request.user.is_authenticated:
@@ -56,7 +57,7 @@ def index(request):
 
 def userLogin(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('index')
     else:
         if request.method =="POST":
             email = request.POST.get('email') 
@@ -66,7 +67,7 @@ def userLogin(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('dashboard')
+                return redirect('index')
             else:
                 messages.error(request, 'Invalid Email/Password')
                 return render(request, 'login.html')
@@ -295,10 +296,14 @@ def view_news(request, category):
     # print(params)
     return render(request, "view_news.html", params)
 
+
+## ADMIN
 @login_required(login_url='login')
+@user_passes_test(lambda user: user.is_superuser)
 def admin_dashboard(request):
     return render(request, "admin_dashboard.html")
 
 @login_required(login_url='login')
-def manage(request):
+@user_passes_test(lambda user: user.is_superuser)
+def manage_users(request):
     return render(request, "manage_user.html")
