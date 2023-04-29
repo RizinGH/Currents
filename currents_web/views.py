@@ -301,7 +301,16 @@ def view_news(request, category):
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_superuser)
 def admin_dashboard(request):
-    return render(request, "admin_dashboard.html")
+
+    total_users = User.objects.all().count() - 1
+    subscribed_users = Subscription.objects.all().count()
+
+    params = {
+        'total_users': total_users,
+        'subscribed_users': subscribed_users,
+
+    }
+    return render(request, "admin_dashboard.html", params)
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_superuser)
