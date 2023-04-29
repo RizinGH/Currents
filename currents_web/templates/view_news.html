@@ -38,9 +38,9 @@ foryou
     </ol>
   </nav>
 </div><!-- End Page Title -->
-<div class="card-deck col-md-12 justify-content-center">
+<div class="row col-md-12 justify-content-center">
   {% for article in news %}
-  <div class="card" style="border: 1px solid #212121;">
+  <div class="card col-md-2 m-2" style="border: 1px solid #212121;">
     <div class="card-header text-center">{{article.publisher.title}}
       <div>
         <input class="star" data-title="{{article.title}}" data-url="{{article.url}}" type="checkbox" onclick="favourite(this)" checked>

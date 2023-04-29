@@ -26,7 +26,7 @@ if not os.path.exists(news_file):
 
     news_today = {
         'top_news': google_news.get_top_news(),
-        'world_news': google_news.get_news_by_topic("WORLD"),
+        'world': google_news.get_news_by_topic("WORLD"),
         'business': google_news.get_news_by_topic("BUSINESS"),
         'technology': google_news.get_news_by_topic("TECHNOLOGY"),
         'entertainment': google_news.get_news_by_topic("ENTERTAINMENT"),
@@ -124,22 +124,26 @@ def dashboard(request):
     return render(request, "dashboard.html", params)
 
 def profile(request):
+    params = {
+        'subscribed': False
+    }
+    
+    # check if subscribed
+    if Subscription.objects.filter(user=request.user).first():
+        params['subscribed'] = True
     
     if request.method == "POST":
         # email = request.POST['email']
         username = request.POST['username']
         preference = request.POST.getlist('preference')
 
-        news_file = os.path.join(SCRAPED_NEWS_DIR, f"{date.today()}_{request.user}_all_news.json")
-
-        if os.path.exists(news_file):
-            os.remove(news_file)
-
         UserDetails.objects.filter(user=request.user).update(username=username, userPreferences=preference)
         
     user_details = UserDetails.objects.filter(user=request.user).first()
+
+    params['user_details'] = user_details
     
-    return render(request, "profile.html", {'user_details': user_details})
+    return render(request, "profile.html", params)
 
 
 def home(request):
@@ -155,27 +159,16 @@ def fy(request):
         preferences = UserDetails.objects.get(user = request.user).userPreferences
         preferences = preferences.strip('][').replace("'", "").replace(" ", "").split(',')
 
-        news_file = os.path.join(SCRAPED_NEWS_DIR, f"{date.today()}_{request.user}_all_news.json")
-
-        if not os.path.exists(news_file):
-            google_news = GNews(language='en', country='IN', period='7d', max_results=5)
-            news = {
-                'top_news': google_news.get_top_news(),
-            }
-            for category in preferences:
-                news[category] = google_news.get_news_by_topic(category)
-            
-            with open(news_file, 'w') as outfile:
-                json.dump(news, outfile)
-        
-        else:
-            with open(news_file, 'r') as infile:
-                news = json.load(infile)
+        fy_news = {
+            'top_news': news_today['top_news']
+        }
+        for pref in preferences:
+            fy_news[pref] = news_today[pref]
 
 
     params = {
         'subscribed': True,
-        'news': news,
+        'news': fy_news,
     }
 
     return render(request, "fy.html", params)
@@ -251,7 +244,7 @@ def favourites(request):
     
     params = {
         'subscribed': True,
-        'favourites': Favourites.objects.all()
+        'favourites': Favourites.objects.filter(user=request.user)
     }
     
     return render(request, 'favourites.html', params)
