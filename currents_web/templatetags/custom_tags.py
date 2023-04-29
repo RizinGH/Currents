@@ -1,4 +1,5 @@
 from django import template
+from currents_web.models import Subscription
 
 register = template.Library()
 
@@ -18,3 +19,9 @@ def convert_degree(kelvin):
 @register.simple_tag(name='to_str')
 def to_str(s):
     return str(s)
+
+@register.simple_tag(name='is_subscribed')
+def is_subscribed(user):
+    if Subscription.objects.filter(user=user):
+        return True
+    return False

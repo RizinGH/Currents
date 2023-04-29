@@ -315,4 +315,22 @@ def admin_dashboard(request):
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_superuser)
 def manage_users(request):
-    return render(request, "manage_user.html")
+    users = UserDetails.objects.all()
+    
+    params = {
+        'users': users,
+    }
+
+    return render(request, "manage_user.html", params)
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.is_superuser)
+def delete_user(request):
+    if request.method == "POST":
+        email = request.POST['email_id']
+
+        user = User.objects.get(email=email)
+        user.delete()
+        return redirect('manage_users')
+
+    return render(request, 'manage_users.html')
