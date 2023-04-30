@@ -296,6 +296,9 @@ def view_news(request, category):
     # print(params)
     return render(request, "view_news.html", params)
 
+@login_required(login_url='login')
+def user_feedback(request):
+    return render(request, 'user_feedback.html')
 
 ## ADMIN
 @login_required(login_url='login')
@@ -334,3 +337,6 @@ def delete_user(request):
         return redirect('manage_users')
 
     return render(request, 'manage_users.html')
+
+
+    

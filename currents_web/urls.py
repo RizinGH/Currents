@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin_dashboard/',views.admin_dashboard, name='admin_dashboard'),
     path('manage_users/',views.manage_users, name='manage_users'),
     path('delete_user/',views.delete_user, name='delete_user'),
+    path('user_feedback', views.user_feedback, name='user_feedback'),
 ]

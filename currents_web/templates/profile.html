@@ -15,12 +15,39 @@ profile
         padding: 20px !important;
         width: 400px !important;
         height: 15px !important;
+        background-color: white;
     }
 
     .multiselect-dropdown {
         width: 400px !important;
         border-radius: 25px;
         padding: 8px 15px;
+    }
+
+    .icon-bar {
+        position: fixed;
+        top: 87%;
+        padding: 92%;
+        transform: translateY(-50%);
+    }
+
+    .icon-bar a {
+        display:block;
+        text-align: center;
+        padding: 20px;
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 25px;
+        border-radius: 50px;
+    }
+
+    .icon-bar a:hover {
+        background-color: #000;
+    }
+
+    .feed {
+        background: #3B5998;
+        color: white;
     }
 </style>
 <div class="p-3 py-5 d-flex justify-content-center">
@@ -43,18 +70,24 @@ profile
         <div class="row mt-3">
             <div class="col-md-6">
                 <label class="labels">Preference</label>
-                <select name="preference" id="preference" class="inp-cust" multiple multiselect-search="true"  multiselect-select-all="false" multiselect-max-items="10" onselect="checkSel(this);">
-                        {% get_list user_details.userPreferences as preference %}
-                        <option value="world" {% if "world" in preference %} selected {% endif %}>world_news</option>
-                        <option value="business" {% if "business" in preference %} selected {% endif %}>business</option>
-                        <option value="technology" {% if "technology" in preference %} selected {% endif %}>technology</option>
-                        <option value="entertainment" {% if "entertainment" in preference %} selected {% endif %}>entertainment</option>
-                        <option value="sports" {% if "sports" in preference %} selected {% endif %}>sports</option>
-                        <option value="science " {% if "science" in preference %} selected {% endif %}>science</option>
+                <select name="preference" id="preference" class="inp-cust" multiple multiselect-search="true"
+                    multiselect-select-all="false" multiselect-max-items="10" onselect="checkSel(this);">
+                    {% get_list user_details.userPreferences as preference %}
+                    <option value="world" {% if "world" in preference %} selected {% endif %}>world_news</option>
+                    <option value="business" {% if "business" in preference %} selected {% endif %}>business</option>
+                    <option value="technology" {% if "technology" in preference %} selected {% endif %}>technology
+                    </option>
+                    <option value="entertainment" {% if "entertainment" in preference %} selected {% endif %}>
+                        entertainment</option>
+                    <option value="sports" {% if "sports" in preference %} selected {% endif %}>sports</option>
+                    <option value="science " {% if "science" in preference %} selected {% endif %}>science</option>
                 </select>
             </div>
         </div>
         <div class="mt-5 text-center"><button class="btn" type="submit">Save Profile</button></div>
 </div>
 </form>
+<div class="icon-bar">
+    <a href="{% url 'user_feedback' %}" class="feed"><i class="bi bi-chat-square-dots"></i></a>
+</div>
 {% endblock %}
