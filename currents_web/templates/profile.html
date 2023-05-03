@@ -23,32 +23,6 @@ profile
         border-radius: 25px;
         padding: 8px 15px;
     }
-
-    .icon-bar {
-        position: fixed;
-        top: 87%;
-        padding: 92%;
-        transform: translateY(-50%);
-    }
-
-    .icon-bar a {
-        display:block;
-        text-align: center;
-        padding: 20px;
-        transition: all 0.3s ease;
-        color: white;
-        font-size: 25px;
-        border-radius: 50px;
-    }
-
-    .icon-bar a:hover {
-        background-color: #000;
-    }
-
-    .feed {
-        background: #3B5998;
-        color: white;
-    }
 </style>
 <div class="p-3 py-5 d-flex justify-content-center">
     <form method="post">
@@ -66,7 +40,6 @@ profile
             <div class="col-md-6"><label class="labels">Name</label><input type="text" class="inp-cust"
                     value="{{user_details.username}}" name="username" required></div>
         </div>
-
         <div class="row mt-3">
             <div class="col-md-6">
                 <label class="labels">Preference</label>
@@ -85,9 +58,8 @@ profile
             </div>
         </div>
         <div class="mt-5 text-center"><button class="btn" type="submit">Save Profile</button></div>
+    </form>
 </div>
-</form>
-<div class="icon-bar">
-    <a href="{% url 'user_feedback' %}" class="feed"><i class="bi bi-chat-square-dots"></i></a>
-</div>
+
+
 {% endblock %}

@@ -45,21 +45,6 @@ Admin Dashboard
         font-weight: 500;
     }
 
-    .piechart {
-        background-image: conic-gradient(rgb(157, 241, 0) 70deg,
-                lightblue 0 235deg,
-                orange 0);
-        border: 2px solid lightgrey;
-        width: 270px;
-        height: 270px;
-        margin: 5% 150px;
-        position: relative;
-        border-radius: 50%;
-        /* color: black; */
-        overflow: hidden;
-        padding-left: 20px;
-    }
-
     .calendar-views span {
         font-size: 14px;
         font-weight: 300;
@@ -100,9 +85,6 @@ Admin Dashboard
         color: #fff;
     }
 </style>
-<br>
-<br>
-<br>
 <div class="row col-md-12 justify-content-center">
     <div class="one">
         <div class="ht">
@@ -129,13 +111,52 @@ Admin Dashboard
                                 <span>{{total_users}}</span>
                             </div>
                         </div>
-
-                        <div class="piechart"></div>
                     </div>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Get the data from Django
+    // var total_users = {{total_users}};
+    // var subscribed_users = {{subscribed_users}};
+
+    // Create a bar graph
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Total Users', 'Subscribed Users'],
+            datasets: [{
+                label: 'Number of Users',
+                data: [total_users, subscribed_users],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+  </script>
 
 {% endblock %}

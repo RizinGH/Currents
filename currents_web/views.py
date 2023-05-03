@@ -1,6 +1,6 @@
 import os
 from django.shortcuts import render,redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
@@ -44,7 +44,6 @@ else:
         news_today = json.load(infile)
 
 
-@login_required(login_url='login')
 def index(request):
     if request.user.is_authenticated:
 
@@ -296,9 +295,6 @@ def view_news(request, category):
     # print(params)
     return render(request, "view_news.html", params)
 
-@login_required(login_url='login')
-def user_feedback(request):
-    return render(request, 'user_feedback.html')
 
 ## ADMIN
 @login_required(login_url='login')
@@ -328,6 +324,17 @@ def manage_users(request):
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_superuser)
+def view_feedbacks(request):
+
+    feedbacks = Feedback.objects.all()
+
+    params = {
+        'feedbacks': feedbacks,
+    }
+    return render(request, 'view_feedbacks.html', params)
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.is_superuser)
 def delete_user(request):
     if request.method == "POST":
         email = request.POST['email_id']
@@ -338,5 +345,24 @@ def delete_user(request):
 
     return render(request, 'manage_users.html')
 
+@login_required(login_url='login')
+def feedback(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        rating = request.POST['rating']
+        feedback = request.POST['feedback']
 
+        Feedback(name=name, rating=int(rating), feedback=feedback).save()
+
+    return redirect(request.META.get('HTTP_REFERER').split('/')[-2])
     
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.is_superuser)
+def delete_feedback(request):
+    if request.method == "POST":
+        feedback_id = request.POST['feedback_id']
+
+        feedback = Feedback.objects.get(id=feedback_id)
+        feedback.delete()
+        
+    return redirect('view_feedbacks')

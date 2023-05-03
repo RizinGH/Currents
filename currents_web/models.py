@@ -116,3 +116,24 @@ class Report(models.Model):
 
        def __str__(self):
               return self.id
+       
+#feedback
+class Feedback(models.Model):
+       id = models.AutoField(
+              primary_key=True
+       )
+
+       name = models.CharField(
+              max_length=100,
+              null=False
+       )
+
+       rating = models.IntegerField()
+
+       feedback = models.CharField(
+              max_length=500,
+              null=False
+       )
+
+       def __str__(self):
+              return f"{self.id}, {self.name}"

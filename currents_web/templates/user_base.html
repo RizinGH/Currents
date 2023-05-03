@@ -18,6 +18,33 @@
   <title>{% block title %}{% endblock %}</title>
 
 </head>
+<style>
+  #feedback-form-wrapper #floating-icon>button {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: rotate(-90deg) translate(50%, -50%);
+    transform-origin: right;
+  }
+
+  #feedback-form-wrapper .rating-input-wrapper input[type="radio"] {
+    display: none;
+  }
+
+  #feedback-form-wrapper .rating-input-wrapper input[type="radio"]~span {
+    cursor: pointer;
+  }
+
+  #feedback-form-wrapper .rating-input-wrapper input[type="radio"]:checked~span {
+    background-color: #4261dc;
+    color: #fff;
+  }
+
+  #feedback-form-wrapper .rating-labels>label {
+    font-size: 14px;
+    color: #777;
+  }
+</style>
 
 <body class="d-flex flex-column min-vh-100">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -75,6 +102,67 @@
     </ul>
     </div>
   </nav>
+  <div id="feedback-form-wrapper">
+    <div id="floating-icon">
+      <button type="button" class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="#exampleModal">
+        Feedback
+      </button>
+
+    </div>
+    <div id="feedback-form-modal">
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Feedback Form</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="post" action="{% url 'feedback' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">How likely you would like to recommand us to
+                    your friends?</label>
+                  <div class="rating-input-wrapper d-flex justify-content-between mt-2">
+                    <label><input type="radio" name="rating" value="1" /><span class="border rounded px-3 py-2">1</span></label>
+                    <label><input type="radio" name="rating" value="2"/><span class="border rounded px-3 py-2">2</span></label>
+                    <label><input type="radio" name="rating" value="3"/><span class="border rounded px-3 py-2">3</span></label>
+                    <label><input type="radio" name="rating" value="4"/><span class="border rounded px-3 py-2">4</span></label>
+                    <label><input type="radio" name="rating" value="5"/><span class="border rounded px-3 py-2">5</span></label>
+                    <label><input type="radio" name="rating" value="6"/><span class="border rounded px-3 py-2">6</span></label>
+                    <label><input type="radio" name="rating" value="7"/><span class="border rounded px-3 py-2">7</span></label>
+                    <label><input type="radio" name="rating" value="8"/><span class="border rounded px-3 py-2">8</span></label>
+                    <label><input type="radio" name="rating" value="9"/><span class="border rounded px-3 py-2">9</span></label>
+                    <label><input type="radio" name="rating" value="10"/><span class="border rounded px-3 py-2">10</span></label>
+                  </div>
+                  <div class="rating-labels d-flex justify-content-between mt-1">
+                    <label>Very unlikely</label>
+                    <label>Very likely</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="input-one">Mention your name</label>
+                  <input type="text" class="form-control" id="input-one" placeholder="" name="name">
+                </div>
+                <div class="form-group">
+                  <label for="input-two">Give us your valuable feedback</label>
+                  <textarea class="form-control" id="input-two" rows="3" name="feedback"></textarea>
+                </div>
+                <div>
+                  <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+                  <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   {% block content %}
   {% endblock %}
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

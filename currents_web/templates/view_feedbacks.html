@@ -2,21 +2,20 @@
 {% load static %}
 {% load custom_tags %}
 {% block title %}
-Manage Users
+Feedbacks
 {% endblock %}
 {% block content %}
-
 <div class="modal fade" id="delete-conf-modal" tabindex="-1" aria-labelledby="delete-conf-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete User?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete Feedback?</h5>
             </div>
             <div class="modal-body">
-                <form action="{% url 'delete_user' %}" method="post">
+                <form action="{% url 'delete_feedback' %}" method="post">
                     {% csrf_token %}
-                    <h6>Are you sure you want to delete the user?</h6>
-                    <input type="hidden" name="email_id" id="modal_email">
+                    <h6>Are you sure you want to delete the Feedback?</h6>
+                    <input type="hidden" name="feedback_id" id="feedback_id">
 
             </div>
             <div class="modal-footer">
@@ -30,24 +29,26 @@ Manage Users
 </div>
 
 <div class="view-data m-4">
-    <h3>View / Edit User</h3>
+    <h3>View / Edit Feedback</h3>
     <hr>
     <table id="table_data" class="table table-striped w-100" style="width:100%">
         <thead>
             <tr>
-                <th>Email</th>
-                <th>Username</th>
-                <th>Subscibed ?</th>
+                <th hidden>Id</th>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Comment</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
 
         <tbody>
-            {% for user in users %}
+            {% for feedback in feedbacks %}
             <tr>
-                <td>{{user.user}}</td>
-                <td>{{user.username}}</td>
-                <td>{% is_subscribed user.user %}</td>
+                <td hidden>{{feedback.id}}</td>
+                <td>{{feedback.name}}</td>
+                <td>{{feedback.rating}}</td>
+                <td>{{feedback.feedback}}</td>
                 <td>
                     <div class="d-flex justify-content-center align-items-center">
                         <button class="btn btn-danger delete-btn p-2 me-2" data-toggle="modal"
@@ -78,7 +79,7 @@ Manage Users
             return $(this).text();
         }).get();
 
-        $('#modal_email').val(data[0]);
+        $('#feedback_id').val(data[0]);
 
 
     });
