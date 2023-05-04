@@ -27,4 +27,8 @@ urlpatterns = [
     path('view_feedbacks', views.view_feedbacks, name='view_feedbacks'),
     path('feedback', views.feedback, name='feedback'),
     path('delete_feedback/',views.delete_feedback, name='delete_feedback'),
+    path('receipt', views.receipt, name='receipt'),
+    path('delete_fav', views.delete_fav, name='delete_fav'),
+
+
 ]

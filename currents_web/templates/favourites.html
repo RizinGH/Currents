@@ -9,22 +9,60 @@ Favourites
 
 {% block content %}
 <div class="pagetitle pt-3">
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item h5 text-dark"><i class="bi bi-star-fill" style="color: yellow; font-size: 15px; margin-right: 5px;"></i><a>Favourites</a></i></li>
-      </ol>
-    </nav>
-  </div><!-- End Page Title -->
-  <div class="card-deck col-md-12 justify-content-center">
-    {% for fav in favourites %}
-    <div class="card col-md-3" style="border: 1px solid #212121;">
-      <div class="card-header text-center ">{{fav.title}}
-      </div>
-      <div class="card-footer text-center">
-        <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
-        <a href="{{fav.url}}" class="card-link text-muted" target="_blank">Read</a>
-      </div>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item h5 text-dark"><i class="bi bi-star-fill"
+          style="color: yellow; font-size: 15px; margin-right: 5px;"></i><a>Favourites</a></i></li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+<div class="card-deck col-md-12 justify-content-center">
+  {% for fav in favourites %}
+  <div class="card col-md-3" style="border: 1px solid #212121;">
+    <button class="close-btn" data-fav_id="{{fav.id}}" onclick="delete_fav(this)">&#xD7;</button>
+    <div class="card-header text-center ">{{fav.title}}
     </div>
-    {% endfor %}
+    <div class="card-footer text-center">
+      <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
+      <a href="{{fav.url}}" class="card-link text-muted" target="_blank">Read</a>
+    </div>
   </div>
+  {% endfor %}
+</div>
+
+<style>
+  .close-btn {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    top: 3px;
+    left: 275px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .close-btn:hover {
+  color: red;
+}
+</style>
+
+<script>
+
+function delete_fav(data){
+    var id = data.getAttribute("data-fav_id");
+
+    post_data = {
+      csrfmiddlewaretoken: "{{ csrf_token }}",
+      id: id,
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'delete_fav' %}",
+      data: post_data,
+      success: location.reload()
+    })
+  }
+
+</script>
 {% endblock %}

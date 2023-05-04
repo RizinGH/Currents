@@ -13,6 +13,7 @@ from decouple import config
 import requests
 from django.conf import settings
 from metalpriceapi.client import Client
+from django.db.models import Avg
 
 SCRAPED_NEWS_DIR = f"{settings.BASE_DIR}{os.path.sep}scraped_news"
 
@@ -193,7 +194,8 @@ def subscribe(request):
     
     if request.method == 'POST':
         Subscription(user = request.user, date = date.today(), amount = 199, payment_mode='card').save()
-        return render(request, "subscribe.html", {'msg': 'success'})
+        return render(request, "receipt.html")
+    
     return render(request, "subscribe.html")
 
 
@@ -277,6 +279,20 @@ def favourites(request):
     return render(request, 'favourites.html', params)
 
 @login_required(login_url='login')
+def receipt(request):
+    params = {
+        'subscribed': False
+    }
+    
+    # check if subscribed
+    if Subscription.objects.filter(user=request.user).first():
+        params['subscribed'] = True
+
+    
+    return render(request, 'receipt.html', params)
+
+
+@login_required(login_url='login')
 def view_news(request, category):
     params = {
         'subscribed': False
@@ -296,6 +312,14 @@ def view_news(request, category):
     return render(request, "view_news.html", params)
 
 
+@login_required(login_url='login')
+def delete_fav(request):
+    id = request.POST['id']
+
+    Favourites.objects.get(id=id).delete()
+
+    return HttpResponse("success")
+
 ## ADMIN
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_superuser)
@@ -303,10 +327,12 @@ def admin_dashboard(request):
 
     total_users = User.objects.all().count() - 1
     subscribed_users = Subscription.objects.all().count()
+    avg_rating = round(Feedback.objects.aggregate(Avg('rating'))['rating__avg'], 2)
 
     params = {
         'total_users': total_users,
         'subscribed_users': subscribed_users,
+        'avg_rating': avg_rating,
 
     }
     return render(request, "admin_dashboard.html", params)
@@ -364,5 +390,5 @@ def delete_feedback(request):
 
         feedback = Feedback.objects.get(id=feedback_id)
         feedback.delete()
-        
+
     return redirect('view_feedbacks')
