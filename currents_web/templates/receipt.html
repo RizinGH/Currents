@@ -122,7 +122,11 @@ Receipt
         padding-bottom: 20%;
 
     }
-    
+
+    @page {
+  size: A4 landscape;
+}
+
 </style>
 
 <div class="card">
@@ -142,7 +146,7 @@ Receipt
                             <td>Email: <span>{{ request.user }}</span></td>
                         </tr>
                         <tr>
-                            <td>Date:  <span id="date"></span></td>
+                            <td>Date: <span id="date"></span></td>
                         </tr>
                     </table>
                 </td>

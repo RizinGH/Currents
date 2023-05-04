@@ -192,9 +192,12 @@ def subscribe(request):
     if Subscription.objects.filter(user=request.user).first():
         return redirect('fy')
     
+    params = {
+        'subscribed': True,
+    }
     if request.method == 'POST':
         Subscription(user = request.user, date = date.today(), amount = 199, payment_mode='card').save()
-        return render(request, "receipt.html")
+        return render(request, "receipt.html",params)
     
     return render(request, "subscribe.html")
 
@@ -281,7 +284,7 @@ def favourites(request):
 @login_required(login_url='login')
 def receipt(request):
     params = {
-        'subscribed': False
+        'subscribed': True
     }
     
     # check if subscribed
@@ -329,24 +332,10 @@ def admin_dashboard(request):
     subscribed_users = Subscription.objects.all().count()
     avg_rating = round(Feedback.objects.aggregate(Avg('rating'))['rating__avg'], 2)
 
-    mountain_elevation_data = [
-			{ "label": "Mount Everest", "y": 8848 },
-			{ "label": "K2", "y": 8611 },
-			{ "label": "Kangchenjunga", "y": 8586 },
-			{ "label": "Lhotse", "y": 8516 },
-			{ "label": "Makalu", "y": 8485 },
-			{ "label": "Cho Oyu", "y": 8201 },
-			{ "label": "Dhaulagiri", "y": 8167 },
-			{ "label": "Manaslu", "y": 8163 },
-			{ "label": "Nanga Parbat", "y": 8126 },
-			{ "label": "Annapurna", "y": 8091 }
-    ]
-
     params = {
         'total_users': total_users,
         'subscribed_users': subscribed_users,
         'avg_rating': avg_rating,
-        'mountain_elevation_data': mountain_elevation_data,
 
     }
     return render(request, "admin_dashboard.html", params)
