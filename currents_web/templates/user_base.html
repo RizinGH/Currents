@@ -64,7 +64,7 @@
         <a class="navbar-brand" href="{% url 'index' %}">
           <img src="{% static 'images/currents.png' %}" alt="" height="25" width="30">
         </a>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
         </li>
         {% if not subscribed %}
@@ -100,7 +100,7 @@
           {{request.user}} </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person-circle"></i> Profile</a>
-          <a class="dropdown-item" href="{% url 'change_password' %}"><i class="bi bi-eye-slash-fill"></i>
+          <a class="dropdown-item" href="{% url 'change_password' %}">
             ChangePassword</a>
           <a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-left"></i> Log Out</a>
         </div>

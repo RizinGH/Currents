@@ -33,7 +33,7 @@ profile
 
         <div class="row mt-1">
             <div class="col-md-6"><label class="labels">Email ID</label><input type="text" class="inp-cust"
-                    value="{{user_details.user}}" name="email" required readonly></div>
+                    value={% if request.user.is_superuser %}"{{request.user}}"{% else %}"{{user_details.user}}"{% endif %} name="email" required readonly></div>
         </div>
 
         <div class="row mt-2">

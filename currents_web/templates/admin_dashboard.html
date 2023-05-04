@@ -23,8 +23,8 @@ Admin Dashboard
     }
 
     .panel {
-        width: 750px;
-        height: 400px;
+        width: 300px;
+        height: 450px;
         background: #838CC7;
         box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.10);
         border-radius: 6px;
@@ -43,6 +43,7 @@ Admin Dashboard
     .title {
         color: #5E6977;
         font-weight: 500;
+        text-align: left;
     }
 
     .calendar-views span {
@@ -84,6 +85,232 @@ Admin Dashboard
         font-weight: 300;
         color: #fff;
     }
+
+    h2 {
+        font-size: 18px;
+        font-weight: normal;
+        line-height: 20px;
+        margin: 0 0 20px 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    h4 {
+        color: #545454;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 20px;
+        margin: 0 0 20px 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    a {
+        color: #333;
+    }
+
+    /* Table */
+    #data-table {
+        border: none;
+        /* Turn off all borders */
+        border-top: 1px solid #ccc;
+        width: 60%;
+    }
+
+    #data-table th,
+    #data-table td {
+        border: none;
+        /* Turn off all borders */
+        border-bottom: 1px solid #ccc;
+        margin: 0;
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Toggle */
+    .toggles {
+        background: #ebebeb;
+        color: #545454;
+        height: 20px;
+        padding: 15px;
+    }
+
+    .toggles p {
+        margin: 0;
+    }
+
+    .toggles a {
+        background: #222;
+        border-radius: 3px;
+        color: #fff;
+        display: block;
+        float: left;
+        margin: 0 10px 0 0;
+        padding: 0 6px;
+        text-decoration: none;
+    }
+
+    .toggles a:hover {
+        background: #666;
+    }
+
+    #reset-graph-button {
+        float: right;
+    }
+
+    /* Graph */
+    /* Containers */
+    #wrapper {
+        margin: 25px auto;
+        width: 60%;
+    }
+
+    #figure {
+        height: 380px;
+        position: relative;
+    }
+
+    #figure ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .graph {
+        height: 283px;
+        position: relative;
+    }
+
+    /* Legend */
+    .legend {
+        background: #f0f0f0;
+        border-radius: 4px;
+        bottom: 0;
+        position: absolute;
+        text-align: left;
+        width: 540px;
+    }
+
+    .legend li {
+        display: block;
+        float: left;
+        height: 20px;
+        margin: 0;
+        padding: 10px 30px;
+        width: 120px;
+    }
+
+    .legend span.icon {
+        background-position: 50% 0;
+        border-radius: 2px;
+        display: block;
+        float: left;
+        height: 16px;
+        margin: 2px 10px 0 0;
+        width: 16px;
+    }
+
+    /* X-Axis */
+    .x-axis {
+        bottom: 0;
+        color: #555;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+    }
+
+    .x-axis li {
+        float: left;
+        margin: 0 15px;
+        padding: 5px 0;
+        width: 10%;
+    }
+
+    .x-axis li span {
+        float: left;
+    }
+
+    /* Y-Axis */
+    .y-axis {
+        color: #555;
+        position: absolute;
+        text-align: right;
+        width: 100%;
+    }
+
+    .y-axis li {
+        border-top: 1px solid #ccc;
+        display: block;
+        height: 62px;
+        width: 100%;
+    }
+
+    .y-axis li span {
+        display: block;
+        margin: -10px 0 0 -60px;
+        padding: 0 10px;
+        width: 40px;
+    }
+
+    /* Graph Bars */
+    .bars {
+        height: 253px;
+        position: absolute;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .bar-group {
+        float: left;
+        height: 100%;
+        margin: 0 15px;
+        position: relative;
+        width: 10%;
+    }
+
+    .bar {
+        border-radius: 3px 3px 0 0;
+        bottom: 0;
+        cursor: pointer;
+        height: 0;
+        position: absolute;
+        text-align: center;
+        width: 24px;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+    }
+
+    .bar span {
+        background: #fefefe;
+        border-radius: 3px;
+        left: -8px;
+        display: none;
+        margin: 0;
+        position: relative;
+        text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
+        width: 40px;
+        z-index: 20;
+
+        -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px;
+        box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px;
+    }
+
+    .bar:hover span {
+        display: block;
+        margin-top: -25px;
+    }
+
+    #data-table.js {
+        display: none;
+    }
+
+    .bar span {
+        background: #fefefe;
+    }
+
+    .fig0 {
+        background: rgb(204, 150, 0);
+    }
 </style>
 <div class="row col-md-12 justify-content-center">
     <div class="one">
@@ -93,11 +320,11 @@ Admin Dashboard
                     <div class="panel-header">
                         <h3 class="title">Statistics</h3>
 
-                        <div class="calendar-views">
+                        <!-- <div class="calendar-views">
                             <span>Day</span>
                             <span>Week</span>
                             <span>Month</span>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="panel-body">
@@ -111,56 +338,241 @@ Admin Dashboard
                                 <span>{{total_users}}</span>
                             </div>
                             <div class="category">
-                                <span style="color: lightblue; font-size: 20px;">Avg. Rating</span>
+                                <span style="color: rgb(247, 182, 6); font-size: 20px;">Avg. Rating</span>
                                 <span>{{avg_rating}}</span>
                             </div>
                         </div>
                     </div>
-                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
+    <div id="wrapper" class="col-md-5" style=" padding-top: 100px;">
+        <div class="chart" >
+            <table id="data-table" cellpadding="10" cellspacing="0" summary="skillset">
+                <thead>
+                    <tr>
+                        <!-- <td>&nbsp;</td> -->
+                        <th scope="col">Total</th>
+                        <th scope="col">Subscribed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{total_users}}</td>
+                        <td>{{subscribed_users}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-{% endblock %}
 
-{% block scripts %}
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    // Get the data from Django
-    // var total_users = {{total_users}};
-    // var subscribed_users = {{subscribed_users}};
+<script>
 
-    // Create a bar graph
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Total Users', 'Subscribed Users'],
-            datasets: [{
-                label: 'Number of Users',
-                data: [total_users, subscribed_users],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
+    $(document).ready(function () {
+        // hide table if js enabled
+        $('#data-table').addClass('js');
+
+        // Create our graph from the data table and specify a container to put the graph in
+        createGraph('#data-table', '.chart');
+
+        // Here be graphs
+        function createGraph(data, container) {
+            // Declare some common variables and container elements	
+            var bars = [];
+            var figureContainer = $('<div id="figure"></div>');
+            var graphContainer = $('<div class="graph"></div>');
+            var barContainer = $('<div class="bars"></div>');
+            var data = $(data);
+            var container = $(container);
+            var chartData;
+            var chartYMax;
+            var columnGroups;
+
+            // Timer variables
+            var barTimer;
+            var graphTimer;
+
+            // Create table data object
+            var tableData = {
+                // Get numerical data from table cells
+                chartData: function () {
+                    var chartData = [];
+                    data.find('tbody td').each(function () {
+                        chartData.push($(this).text());
+                    });
+                    return chartData;
+                },
+                // Get heading data from table caption
+                chartHeading: function () {
+                    var chartHeading = data.find('caption').text();
+                    return chartHeading;
+                },
+                // Get legend data from table body
+                chartLegend: function () {
+                    var chartLegend = [];
+                    // Find th elements in table body - that will tell us what items go in the main legend
+                    data.find('tbody th').each(function () {
+                        chartLegend.push($(this).text());
+                    });
+                    return chartLegend;
+                },
+                // Get highest value for y-axis scale
+                chartYMax: function () {
+                    var chartData = this.chartData();
+                    // Round off the value
+                    var chartYMax = Math.ceil(Math.max.apply(Math, chartData) / 100) * 100;
+                    return chartYMax;
+                },
+                // Get y-axis data from table cells
+                yLegend: function () {
+                    var chartYMax = this.chartYMax();
+                    var yLegend = [];
+                    // Number of divisions on the y-axis
+                    var yAxisMarkings = 5;
+                    // Add required number of y-axis markings in order from 0 - max
+                    for (var i = 0; i < yAxisMarkings; i++) {
+                        yLegend.unshift(((chartYMax * i) / (yAxisMarkings - 1)));
                     }
-                }]
+                    return yLegend;
+                },
+                // Get x-axis data from table header
+                xLegend: function () {
+                    var xLegend = [];
+                    // Find th elements in table header - that will tell us what items go in the x-axis legend
+                    data.find('thead th').each(function () {
+                        xLegend.push($(this).text());
+                    });
+                    return xLegend;
+                },
+                // Sort data into groups based on number of columns
+                columnGroups: function () {
+                    var columnGroups = [];
+                    // Get number of columns from first row of table body
+                    var columns = data.find('tbody tr:eq(0) td').length;
+                    for (var i = 0; i < columns; i++) {
+                        columnGroups[i] = [];
+                        data.find('tbody tr').each(function () {
+                            columnGroups[i].push($(this).find('td').eq(i).text());
+                        });
+                    }
+                    return columnGroups;
+                }
             }
+
+            // Useful variables for accessing table data		
+            chartData = tableData.chartData();
+            chartYMax = tableData.chartYMax();
+            columnGroups = tableData.columnGroups();
+
+            // Construct the graph
+
+            // Loop through column groups, adding bars as we go
+            $.each(columnGroups, function (i) {
+                // Create bar group container
+                var barGroup = $('<div class="bar-group"></div>');
+                // Add bars inside each column
+                for (var j = 0, k = columnGroups[i].length; j < k; j++) {
+                    // Create bar object to store properties (label, height, code etc.) and add it to array
+                    // Set the height later in displayGraph() to allow for left-to-right sequential display
+                    var barObj = {};
+                    barObj.label = this[j];
+                    barObj.height = Math.floor(barObj.label / chartYMax * 100) + '%';
+                    barObj.bar = $('<div class="bar fig' + j + '"><span>' + barObj.label + '%</span></div>')
+                        .appendTo(barGroup);
+                    bars.push(barObj);
+                }
+                // Add bar groups to graph
+                barGroup.appendTo(barContainer);
+            });
+
+            // Add heading to graph
+            var chartHeading = tableData.chartHeading();
+            var heading = $('<h4>' + chartHeading + '</h4>');
+            heading.appendTo(figureContainer);
+
+            // Add legend to graph
+            var chartLegend = tableData.chartLegend();
+            var legendList = $('<ul class="legend"></ul>');
+            $.each(chartLegend, function (i) {
+                var listItem = $('<li><span class="icon fig' + i + '"></span>' + this + '</li>')
+                    .appendTo(legendList);
+            });
+            legendList.appendTo(figureContainer);
+
+            // Add x-axis to graph
+            var xLegend = tableData.xLegend();
+            var xAxisList = $('<ul class="x-axis"></ul>');
+            $.each(xLegend, function (i) {
+                var listItem = $('<li><span>' + this + '</span></li>')
+                    .appendTo(xAxisList);
+            });
+            xAxisList.appendTo(graphContainer);
+
+            // Add y-axis to graph	
+            var yLegend = tableData.yLegend();
+            var yAxisList = $('<ul class="y-axis"></ul>');
+            $.each(yLegend, function (i) {
+                var listItem = $('<li><span>' + this + '%</span></li>')
+                    .appendTo(yAxisList);
+            });
+            yAxisList.appendTo(graphContainer);
+
+            // Add bars to graph
+            barContainer.appendTo(graphContainer);
+
+            // Add graph to graph container		
+            graphContainer.appendTo(figureContainer);
+
+            // Add graph container to main container
+            figureContainer.appendTo(container);
+
+            // Set individual height of bars
+            function displayGraph(bars, i) {
+                // Changed the way we loop because of issues with $.each not resetting properly
+                if (i < bars.length) {
+                    // Animate height using jQuery animate() function
+                    $(bars[i].bar).animate({
+                        height: bars[i].height
+                    }, 800);
+                    // Wait the specified time then run the displayGraph() function again for the next bar
+                    barTimer = setTimeout(function () {
+                        i++;
+                        displayGraph(bars, i);
+                    }, 100);
+                }
+            }
+
+            // Reset graph settings and prepare for display
+            function resetGraph() {
+                // Stop all animations and set bar height to 0
+                $.each(bars, function (i) {
+                    $(bars[i].bar).stop().css('height', 0);
+                });
+
+                // Clear timers
+                clearTimeout(barTimer);
+                clearTimeout(graphTimer);
+
+                // Restart timer		
+                graphTimer = setTimeout(function () {
+                    displayGraph(bars, 0);
+                }, 200);
+            }
+
+            // Helper functions
+
+            // Call resetGraph() when button is clicked to start graph over
+            $('#reset-graph-button').click(function () {
+                resetGraph();
+                return false;
+            });
+
+            // Finally, display graph via reset function
+            resetGraph();
         }
     });
-  </script>
 
+</script>
 {% endblock %}
