@@ -162,13 +162,15 @@ def fy(request):
     # if already subscibed
     if Subscription.objects.filter(user=request.user).first():
         preferences = UserDetails.objects.get(user = request.user).userPreferences
-        preferences = preferences.strip('][').replace("'", "").replace(" ", "").split(',')
+        
 
         fy_news = {
             'top_news': news_today['top_news']
         }
-        for pref in preferences:
-            fy_news[pref] = news_today[pref]
+        if preferences and preferences != "[]":
+            preferences = preferences.strip('][').replace("'", "").replace(" ", "").split(',')
+            for pref in preferences:
+                fy_news[pref] = news_today[pref]
 
 
     params = {
@@ -330,7 +332,10 @@ def admin_dashboard(request):
 
     total_users = User.objects.all().count() - 1
     subscribed_users = Subscription.objects.all().count()
-    avg_rating = round(Feedback.objects.aggregate(Avg('rating'))['rating__avg'], 2)
+
+    avg_rating = Feedback.objects.aggregate(Avg('rating'))['rating__avg']
+    if avg_rating:
+        avg_rating = round(avg_rating, 2)
 
     params = {
         'total_users': total_users,
