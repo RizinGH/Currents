@@ -20,8 +20,8 @@ Favourites
   {% for fav in favourites %}
   <div class="card col-md-3" style="border: 1px solid #212121;">
     <button class="close-btn" data-fav_id="{{fav.id}}" onclick="delete_fav(this)">&#xD7;</button>
-    <div class="card-header text-center ">{{fav.title}}
-    </div>
+    <div class="card-header text-center "> </div>
+    <div class="card-body">{{fav.title}}</div>
     <div class="card-footer text-center">
       <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
       <a href="{{fav.url}}" class="card-link text-muted" target="_blank">Read</a>
@@ -35,8 +35,8 @@ Favourites
     position: absolute;
     background-color: transparent;
     border: none;
-    top: 3px;
-    left: 275px;
+    top: -5px;
+    left: 300px;
     font-size: 20px;
     cursor: pointer;
   }
