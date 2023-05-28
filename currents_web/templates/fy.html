@@ -93,6 +93,8 @@ foryou
     visibility: hidden;
     font-size: 20px;
     cursor: pointer;
+    margin-left: 95%;
+    transform: translateY(-250%);
   }
 
   .star:before {
@@ -108,45 +110,121 @@ foryou
     position: absolute;
 
   }
+
+  /* card */
+  .cards {
+    padding-top: 1%;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    padding-bottom: 1%;
+  }  
+
+  .card {
+    transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+    background-color: #fff;
+    width: 140%;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+  }
+
+
+  .card__info {
+    z-index: 2;
+    background-color: #fff;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 16px 24px 24px 24px;
+  }
+
+  .card__category {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #868686;
+  }
+
+  .card__title {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-family: 'Roboto Slab', serif;
+  }
+
+  .card__by {
+    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+  }
+
+  .card__author {
+    font-weight: 600;
+    text-decoration: none;
+    color: #AD7D52;
+  }
+  /* more */
+  .double-arrow-btn {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+    font-size: 20px;
+    padding-top: 20%;
+    padding: 5px 10px;
+    margin-top: 20px;
+  }
+
+  .double-arrow-btn:focus {
+    outline: none;
+    border: none;
+  }
+
+  .button-container {
+    margin-top: 150px;
+    padding-left: 50px;
+  }
+
 </style>
 {% for category, articles in news.items %}
 <div class="pagetitle pt-3">
-  <nav style="background-color: #212121;">
-    <ol class="breadcrumb" style="background-color: #212121;">
-      <li class="breadcrumb-item h5 text-secondary"><a>News</a></li>
-      <li class="breadcrumb-item active h5 text-light">{{category}}</li>
+  <nav style="background-color: #ffffff;">
+    <ol class="breadcrumb" style="background-color: #ffffff;">
+      <li class="breadcrumb-item h5 text-dark" style="font-family: 'Roboto Slab', serif; font-size: x-large;"><a>News</a></li>
+      <li class="breadcrumb-item active h5" style="color: #aa5e07; font-family: 'Roboto Slab', serif; font-size: x-large;">{{category}}</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
-<div class="row col-md-12 justify-content-center">
+
+<div class="row col-md-12">
   {% for article in articles %}
-  <div class="card col-md-2 m-2" style="border: 1px solid #212121;">
-    <div class="card-header text-center">{{article.publisher.title}}
-      <div>
+  <div class="cards col-md-4">
+    <div class="card card--1">
+      <div class="card__info">
+        <span class="card__category" style="color: rgb(11, 104, 99);"> {{article.publisher.title}}</span>
         <input class="star" data-title="{{article.title}}" data-url="{{article.url}}" type="checkbox" onclick="favourite(this)" checked>
+        <h3 class="card__title">{{article.title}}</h3>
+        <a class="card__title">{% trim_desc article.description %}</a>
+        <a href="{{article.url}}" class="card-link text-muted" target="_blank"><strong>Read More</strong> </a>
       </div>
     </div>
-    <div class="card-body">
-      <h5 class="card-title font-weight-bold">{{article.title}}</h5>
-      <p class="card-text">{% trim_desc article.description %}</p>
-    </div>
-    <div class="card-footer text-center">
-      <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
-      <a href="{{article.url}}" class="card-link text-muted" target="_blank">Read More</a>
-    </div>
   </div>
-  <!-- <div class="card" style="width: 18rem; border: 1px solid grey;">
-        <div class="card-body">
-          <h5 class="card-title">{{article.title}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted"><a href="{{article.publisher.href}}" class="card-link">{{article.publisher.title}}</a></h6>
-          <p class="card-text">{{article.description}}</p>
-          <a href="{{article.url}}" class="card-link">Read More</a>
-        </div>
-      </div> -->
   {% endfor %}
+  <div class="button-container">
+    <a href="{% url 'fy' %}">
+      <button class="double-arrow-btn">
+        >>
+      </button>
+    </a>
+  </div>
 </div>
 </hr>
+
 {% endfor %}
+
+
 <script>
   function favourite(data){
     var title = data.getAttribute("data-title");

@@ -50,58 +50,85 @@
             display:none;
         }
     }
+
+    .navMenu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.navMenu a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  width: 80px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:hover {
+  color: #fddb3a;
+}
+
+.navMenu .dot {
+  width: 6px;
+  height: 6px;
+  background: #fddb3a;
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:nth-child(1):hover ~ .dot {
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(2):hover ~ .dot {
+  -webkit-transform: translateX(110px);
+  transform: translateX(110px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(3):hover ~ .dot {
+  -webkit-transform: translateX(200px);
+  transform: translateX(200px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(4):hover ~ .dot {
+  -webkit-transform: translateX(285px);
+  transform: translateX(285px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
 </style>
 
 <body class="d-flex flex-column min-vh-100">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'index' %}"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <a class="navbar-brand" href="{% url 'index' %}">
-          <img src="{% static 'images/currents.png' %}" alt="" height="25" width="30">
-        </a>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-        </li>
-        {% if not subscribed %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'subscription' %}">Subscription</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'fy' %}">For you</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'weather' %}">Weather</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'favourites' %}">Favourites</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'metal_rates' %}">Metal Rates</a>
-        </li>
-        {% endif %}
-    </div>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          {{request.user}} </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person-circle"></i> Profile</a>
-          <a class="dropdown-item" href="{% url 'change_password' %}">
-            ChangePassword</a>
-          <a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-left"></i> Log Out</a>
-        </div>
-      </li>
-    </ul>
-    </div>
-  </nav>
+    <nav class="navMenu">
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">Work</a>
+        <a href="#">About</a>
+        <div class="dot"></div>
+      </nav>
   <div id="feedback-form-wrapper" >
     <div id="floating-icon">
       <button type="button" class="btn btn-primary btn-sm rounded-0 no-print" data-toggle="modal" data-target="#exampleModal">

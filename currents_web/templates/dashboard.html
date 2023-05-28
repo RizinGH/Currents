@@ -15,21 +15,118 @@ Currents
     text-decoration: none;
   }
 
+  .cards {
+    padding-top: 3%;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+  }
+
+  .card__info-hover {
+    position: absolute;
+    padding: 16px;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+  }
+
+  .card__img--hover {
+    transition: 0.2s all ease-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    position: absolute;
+    height: 235px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    top: 0;
+
+  }
+
+  .card {
+    transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+    background-color: #fff;
+    width: 140%;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+  }
+
+  .card:hover {
+    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.10, 1.10);
+  }
+
+  .card__info {
+    z-index: 2;
+    background-color: #fff;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 16px 24px 24px 24px;
+  }
+
+  .card__category {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #868686;
+  }
+
+  .card__title {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-family: 'Roboto Slab', serif;
+    color: #AD7D52;
+  }
+
+  .card__by {
+    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+  }
+
+  .card__author {
+    font-weight: 600;
+    text-decoration: none;
+    color: #AD7D52;
+  }
+
+
+  .card:hover .card__info {
+    background-color: transparent;
+    position: relative;
+  }
+
+  .card:hover .card__info-hover {
+    opacity: 1;
+  }
+
+  #cate{
+    color:darkcyan;
+  }
 </style>
 
 <div class="pagetitle pt-3">
-  <nav style="background-color: #212121;">
-    <ol class="breadcrumb" style="background-color: #212121;">
-      <li class="breadcrumb-item h5 text-secondary"><a>News</a></li>
-      <li class="breadcrumb-item active h5 text-light">Categories</li>
+  <nav style="background-color: #ffffff;">
+    <ol class="breadcrumb" style="background-color: #ffffff;">
+      <li class="breadcrumb-item h5" style="font-family: 'Roboto Slab', serif;"><a>News</a></li>
+      <li class="breadcrumb-item active h5"  id="cate" style="font-family: 'Roboto Slab', serif;"><span>Categories</span></li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
-<div class="row m-5 justify-content-center">
+
+<div class="row col-md-12">
   {% for category in categories %}
-  <div class="card text-center col-md-3 m-1">
-    <div class="card-body">
-      <a href="{% url 'view_news' category=category %}" class="text-dark"><h5 class="card-title">{{category|upper}}</h5></a>
+  <div class="cards col-md-3">
+    <div class="card card--1">
+      <div class="card__info">
+        <a href="{% url 'view_news' category=category %}" class="text-dark"><h5 class="card-title card__author">{{category|upper}}</h5></a>
+        <span class="card__by">by <a  class="" title="author">Currents</a></span>
+      </div>
     </div>
   </div>
   {% endfor %}

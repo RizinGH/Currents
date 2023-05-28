@@ -24,7 +24,7 @@ if not os.path.exists(SCRAPED_NEWS_DIR):
 news_file = os.path.join(SCRAPED_NEWS_DIR, f"{date.today()}_all_news.json")
 # scrape news if not already done
 if not os.path.exists(news_file):
-    google_news = GNews(language='en', country='IN', period='7d', max_results=10)
+    google_news = GNews(language='en', country='IN', period='7d', max_results=11)
 
     news_today = {
         'top_news': google_news.get_top_news(),
@@ -400,3 +400,73 @@ def delete_feedback(request):
         feedback.delete()
 
     return redirect('view_feedbacks')
+
+
+
+
+
+# profile 2
+
+@login_required(login_url='login')
+def profile2(request):
+    params = {
+        'subscribed': False
+    }
+    
+    # check if subscribed
+    if Subscription.objects.filter(user=request.user).first():
+        params['subscribed'] = True
+    
+    if request.method == "POST":
+        # email = request.POST['email']
+        username = request.POST['username']
+        preference = request.POST.getlist('preference')
+
+        UserDetails.objects.filter(user=request.user).update(username=username, userPreferences=preference)
+        
+    user_details = UserDetails.objects.filter(user=request.user).first()
+
+    params['user_details'] = user_details
+    
+    return render(request, "profile2.html", params)
+
+# userbase2
+
+def user_base2(request):
+    
+    return render(request, 'user_base2.html')
+
+
+# metal2
+@login_required(login_url='login')
+def metal_rates2(request):
+    # metals = {
+    #     'XAU': 'Gold',
+    #     'XAG': 'Silver',
+    #     'XPD': 'Palladium',
+    #     'XPT': 'Platinum',
+    # }
+
+    # ounce_in_gms = 0.035274
+
+    # # check if subscribed
+    # if not Subscription.objects.filter(user=request.user).first():
+    #     return redirect('subscription')
+    
+    # metalp_client = client = Client(config('METAL_PRICE_API_KEY'))
+
+    # resp = client.fetchLive(base='INR', currencies=list(metals.keys()))
+
+    # metal_prices = {}
+
+    # for symbol, metal in metals.items():
+    #     metal_prices[metal] = round(ounce_in_gms / resp['rates'][symbol], 2)
+
+    # params = {
+    #     'subscribed': True,
+    #     'metal_prices': metal_prices
+    # }
+
+    
+
+    return render(request, 'metal_rates2.html')

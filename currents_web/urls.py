@@ -27,8 +27,11 @@ urlpatterns = [
     path('view_feedbacks', views.view_feedbacks, name='view_feedbacks'),
     path('feedback', views.feedback, name='feedback'),
     path('delete_feedback/',views.delete_feedback, name='delete_feedback'),
-    path('receipt', views.receipt, name='receipt'),
-    path('delete_fav', views.delete_fav, name='delete_fav'),
-
+    path('receipt/', views.receipt, name='receipt'),
+    path('delete_fav/', views.delete_fav, name='delete_fav'),
+    # additional
+    path('profile2/', views.profile2, name='profile2'),
+    path('user_base2/', views.user_base2, name='user_base2'),
+    path('metal_rates2/', views.metal_rates2, name="metal_rates2"),
 
 ]
